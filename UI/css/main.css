@@ -6,12 +6,21 @@
     position: relative;
 }
 
+#admin-page {
+    background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent), url("../images/background-board-equipment.jpg") center/cover no-repeat border-box, #ff1b68;
+    width: 100vw;
+    height: 80vh;
+    margin-top: 2.75rem;
+    position: relative;
+}
+
 .section-title {
     color: #2ddf5c;
     text-align: center;
 }
 
-#landing-page-text h1 {
+#landing-page-text h1,
+#admin-page h1 {
     color: white;
     font-family: 'Anton', sans-serif;
     position: absolute;
