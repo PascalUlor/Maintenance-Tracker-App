@@ -25,7 +25,6 @@ main {
 }
 
 
-.signup-form input:not([type="checkbox"]),
 .signup-form select {
     border: 1px solid #ccc;
     padding: 0.2rem 0.5rem;
