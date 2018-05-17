@@ -49,4 +49,35 @@ static getAllRequests(req, res) {
         });
     }
 }
+
+/**
+ * API method to (PUT) update a Request
+ * @param {obj} req
+ * @param {obj} res
+ * @returns {obj} with success or error message
+ */
+static updateRequests(req, res) {
+    const {
+location, workDescription
+} = req.body;
+const index = parseInt(req.params.id, 10);
+  const edit = {
+  id: index,
+  location,
+  workDescription
+  };
+    const found = db.requestDb.find(request => request.id === index);
+      if (found) {
+        db.requestDb[index - 1] = edit;
+         return res.status(200).json({
+          success: true,
+          message: 'Request with id successfully updated',
+          data: db.requestDb
+          });
+      }
+        return res.status(400).json({
+          success: false,
+          message: 'Request with id does not exist'
+          });
+} // Method to Update business ends
 }
