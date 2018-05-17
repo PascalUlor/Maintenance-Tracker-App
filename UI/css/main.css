@@ -119,7 +119,7 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    text-align: center;
+    text-align: left;
 }
 
 .footer-link {
@@ -222,7 +222,7 @@ body {
 #landing-page-text {
     background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent), url("../images/bg-technician.jpg") center/cover no-repeat border-box, #ff1b68;
     width: 100vw;
-    height: 80vh;
+    min-height: 100vh;
     margin-top: 2.75rem;
     position: relative;
 }
@@ -230,8 +230,8 @@ body {
 #admin-page {
     background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent), url("../images/background-board-equipment.jpg") center/cover no-repeat border-box, #ff1b68;
     width: 100vw;
-    height: 80vh;
-    margin-top: 2.75rem;
+    min-height: 100vh;
+    margin-top: 1rem;
     position: relative;
 }
 

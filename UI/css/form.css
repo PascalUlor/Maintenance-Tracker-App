@@ -60,7 +60,7 @@ main {
 
 @media (min-width: 40rem) {
     .input-form {
-        margin: auto;
+        margin: 0 25rem;
         width: 25rem;
     }
     .form-title {
