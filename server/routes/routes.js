@@ -1,17 +1,16 @@
 import express from 'express';
-import usersController from '../controllers/users';
-import adminController from '../controllers/admin';
+import requestController from '../controllers/requests';
 
 const router = express.Router();
 
 router.route('/users/requests')
-    .post(usersController.createRequest);
-    // .get(usersController.getRequests);
+    .post(requestController.createRequest)
+    .get(requestController.getAllRequests);
 
 // router.route('/users/requests/:id')
-//     .put(usersController.updateRequests)
-//     .delete(usersController.deleteRquest)
-//     .get(usersController.getsingleRequests);
+//     .put(requestController.updateRequests)
+//     .delete(requestController.deleteRquest)
+//     .get(requestController.getsingleRequests);
 
 // router.route('/auth/signup')
 //     .post(usersController.userSignup);
