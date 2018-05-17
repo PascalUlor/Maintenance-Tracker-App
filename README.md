@@ -1,3 +1,11 @@
+[![Build Status](https://travis-ci.org/PascalUlor/Maintenance-Tracker-App.svg?branch=master)](https://travis-ci.org/PascalUlor/Maintenance-Tracker-App)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/5392bd5f66f2c0e1ede5/maintainability)](https://codeclimate.com/github/PascalUlor/Maintenance-Tracker-App/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/5392bd5f66f2c0e1ede5/test_coverage)](https://codeclimate.com/github/PascalUlor/Maintenance-Tracker-App/test_coverage)
+
+[![Coverage Status](https://coveralls.io/repos/github/PascalUlor/Maintenance-Tracker-App/badge.svg?branch=master)](https://coveralls.io/github/PascalUlor/Maintenance-Tracker-App?branch=master)
+
 # Maintenance-Tracker-App
 **Maintenance-Tracker-App** is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs department regarding repair or maintenance requests and monitor the status of their request.
 
@@ -43,7 +51,6 @@ The follwing instructions will install the project on your local machine
 The user interface is built for easy navigation and use of the application. It includes the following:
 
 1. The users should be able to make maintenance or repairs request.
-2. The user can modify the request he/she made
 
 
 

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node app.js",
     "start:dev": "nodemon --watch server --exec babel-node -- app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc --reporter=lcov --reporter=text mocha --exit --compilers js:babel-core/register server/specs || true"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
