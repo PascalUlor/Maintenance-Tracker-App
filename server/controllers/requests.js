@@ -79,5 +79,27 @@ const index = parseInt(req.params.id, 10);
           success: false,
           message: 'Request with id does not exist'
           });
-} // Method to Update business ends
+} // Method to Update request ends
+
+/**
+     * API method to GET a single request
+     * @param {obj} req
+     * @param {obj} res
+     * @returns {obj} success message
+     */
+    static getSingleRequest(req, res) {
+        const index = parseInt(req.params.id, 10);
+        const found = db.requestDb.find(request => request.id === index);
+        if (found) {
+                  return res.status(200).json({
+                      success: true,
+                      message: 'Successfully Retrieved Request',
+                      data: db.requestDb[index - 1]
+                  });
+              }
+              return res.status(400).json({
+                success: false,
+                message: 'Business does not exist'
+            });
+      }// getSinglerequest ends
 }
