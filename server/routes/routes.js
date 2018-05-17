@@ -8,13 +8,7 @@ router.route('/users/requests')
     .get(requestController.getAllRequests);
 
 router.route('/users/requests/:id')
-    .put(requestController.updateRequests);
-    // .delete(requestController.deleteRquest)
-    // .get(requestController.getsingleRequests);
-
-// router.route('/auth/signup')
-//     .post(usersController.userSignup);
-// router.route('/auth/login')
-//     .post(usersController.userLogin);
+    .put(requestController.updateRequests)
+    .get(requestController.getSingleRequest);
 
 export default router;
