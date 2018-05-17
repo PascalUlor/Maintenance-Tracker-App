@@ -43,6 +43,7 @@ The follwing instructions will install the project on your local machine
 The user interface is built for easy navigation and use of the application. It includes the following:
 
 1. The users should be able to make maintenance or repairs request.
+2. The user can modify the request he/she made
 
 
 
