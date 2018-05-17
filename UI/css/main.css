@@ -1,0 +1,35 @@
+#landing-page-text {
+    background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent), url("../images/bg-technician.jpg") center/cover no-repeat border-box, #ff1b68;
+    width: 100vw;
+    height: 80vh;
+    margin-top: 2.75rem;
+    position: relative;
+}
+
+.section-title {
+    color: #2ddf5c;
+    text-align: center;
+}
+
+#landing-page-text h1 {
+    color: white;
+    font-family: 'Anton', sans-serif;
+    position: absolute;
+    bottom: 5%;
+    left: 3%;
+    font-size: 1.6rem;
+}
+
+
+
+
+  @media (min-width: 40rem) and (min-height: 60rem) {
+    #landing-page-text {
+        height: 80vh;
+        background-position: 50% 25%;
+    }
+
+    #landing-page-text h1 {
+        font-size: 3rem;
+    }
+  }
