@@ -5,22 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Maintenance Tracker Signup</title>
+  <title>uHost</title>
   <link rel="shortcut icon" href="../favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Anton|Montserrat:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link rel="stylesheet" href="./css/main.css">
-  <link rel="stylesheet" href="./css/form.css">
+  <link rel="stylesheet" href="./css/request.css">
 </head>
 
 <body>
   <div class="backdrop"></div>
+  <div class="background-image"></div>
   <header class="main-header">
     <div>
+      <!-- Mobile Nav button -->
       <button class="toggle-button">
         <span class="toggle-button__bar"></span>
         <span class="toggle-button__bar"></span>
         <span class="toggle-button__bar"></span>
       </button>
+
     </div>
     <nav class="main-nav">
       <ul class="main-nav__items">
@@ -34,11 +37,12 @@
           <a href="create-request.html">Services</a>
         </li>
         <li class="main-nav__item nav_button">
-          <a href="signup.html">Get Started</a>
+          <a href="siginup.html">Get Started</a>
         </li>
       </ul>
     </nav>
   </header>
+  <!-- Side nav for mobile -->
   <nav class="mobile-nav">
     <ul class="mobile-nav__items">
       <li class="mobile-nav__item">
@@ -55,20 +59,36 @@
       </li>
     </ul>
   </nav>
-  <main class="signup-page">
-    <h1 class="form-title">Login</h1>
-    <form action="index.html" class="input-form">
-      <label for="email">E-Mail</label>
-      <input type="email" id="email">
-      <label for="password">Password</label>
-      <input type="password" id="password">
-      <label for="agree-terms">Don't Have An Account?
-        <a href="signup.html">Signup</a>
-      </label>
-      <button type="submit" class="button">
-        <a href="admin-page.html">Login</a>
-      </button>
-    </form>
+  <main>
+    <h1 class="request-list">MY REQUEST</h1>
+    <section class="request plus">
+      <a href="#">
+        <h1 class="request-title">Joe</h1>
+        <h2 class="resolved">UNRESOLVED</h2>
+        <h2 class="sub-title">Work Description</h2>
+        <p class="page-info">is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs
+          department regarding repair or maintenance requests and monitor the status of their request.</p>
+      </a>
+    </section>
+
+    <section class="request plus">
+      <a href="#">
+        <h1 class="request-title">Joe</h1>
+        <h2 class="resolved">RESOLVED</h2>
+        <h2 class="sub-title">Work Description</h2>
+        <p class="page-info">Get started immediately at zero cost!</p>
+      </a>
+    </section>
+    
+    <section class="request plus">
+      <a href="#">
+        <h1 class="request-title">Jeo</h1>
+        <h2 class="resolved">RESOLVED</h2>
+        <h2 class="sub-title">Work Description</h2>
+        <p class="page-info">is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs
+          department regarding repair or maintenance requests and monitor the status of their request.</p>
+      </a>
+    </section>
   </main>
   <footer class="main-footer">
     <nav>
@@ -81,7 +101,6 @@
         </li>
       </ul>
     </nav>
-  </footer>
   </footer>
   <script src="./js/shared.js"></script>
 </body>

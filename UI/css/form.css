@@ -2,58 +2,68 @@ main {
     padding-top: 1rem;
 }
 
-.signup-title {
+.form-title {
     text-align: center;
     font-size: 1.8rem;
-    color: #ff5454;
+    color: #212121;
 }
 
-.signup-form {
+.input-form {
     padding: 1rem;
 }
 
-.signup-form label {
+.input-form [type="email"],
+.input-form [type="password"],
+.input-form [type="text"] {
+    height: 2rem;
+    width: 30rem;
+}
+
+.input-form label {
     font-weight: bold;
 }
 
-.signup-form label,
-.signup-form input,
-.signup-form select {
+.input-form label,
+.input-form input,
+.input-form select {
     display: block;
     margin-top: 1rem;
     width: 100%;
 }
 
 
-.signup-form select {
+.input-form select {
     border: 1px solid #ccc;
     padding: 0.2rem 0.5rem;
     font: inherit;
 }
 
-.signup-form input:focus,
-.signup-form select:focus {
+.input-form input:focus,
+.input-form select:focus {
     outline: none;
     background: #d8f3df;
     border-color: #2ddf5c;
 }
 
 
-.signup-form input.invalid,
-.signup-form select.invalid,
-.signup-form :invalid {
+.input-form input.invalid,
+.input-form select.invalid,
+.input-form :invalid {
     border-color: red !important;
     background: #faacac;
 }
 
-.signup-form button[type="submit"] {
+.input-form button[type="submit"] {
     display: block;
     margin-top: 1rem;
 }
 
 @media (min-width: 40rem) {
-    .signup-form {
-        margin: auto;
+    .input-form {
+        margin: 0 25rem;
         width: 25rem;
+    }
+    .form-title {
+        margin-top: 5rem;
     }
 }
