@@ -42,31 +42,10 @@ The follwing instructions will install the project on your local machine
 ## Features
 The user interface is built for easy navigation and use of the application. It includes the following:
 
-1. Users can create an account and log in.
-2. The users should be able to make maintenance or repairs request.
-3. An admin should be able to approve/reject a repair/maintenance request.
-4. The admin should be able to mark request as resolved once it is done.
-5. The admin should be able to view all maintenance/repairs requests on the application
-6. The admin should be able to filter requests
-7. The user can view all his/her requests
+1. The users should be able to make maintenance or repairs request.
 
 
-## Built With
-**Maintenance-Tracker-App** is built with the following open source technologies:
 
-**Front-End**
-1. HTML & CSS
-2. Javascript
-
-**Back-End (Server Side)**
-1. NodeJS
-2. Express
-
-**Back-End (Client Side)**
-1. Javascript
-
-**Database**
-* Postgres
 
 ## Deployment
 This Application will be deployed on Heroku
