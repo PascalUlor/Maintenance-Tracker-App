@@ -12,6 +12,13 @@ main {
     padding: 1rem;
 }
 
+.input-form [type="email"],
+.input-form [type="password"],
+.input-form [type="text"] {
+    height: 2rem;
+    width: 30rem;
+}
+
 .input-form label {
     font-weight: bold;
 }
@@ -55,5 +62,8 @@ main {
     .input-form {
         margin: auto;
         width: 25rem;
+    }
+    .form-title {
+        margin-top: 5rem;
     }
 }

@@ -26,7 +26,7 @@ body {
     top: 0;
     left: 0;
     background: #2ddf5c;
-    padding: 8px 16px;
+    padding: 12px 5px 12px 5px;
     z-index: 1;
 }
 
@@ -166,7 +166,7 @@ body {
     font-size: 1.5rem;
   }
 
-  .button a,
+  .button a, .approved,
   .button {
     background: #0e4f1f;
     color: #FFFFFF;
@@ -178,6 +178,19 @@ body {
     cursor: pointer;
     text-decoration: none;
 }
+
+.disapproved {
+    background: #FF5252;
+    color: #FFFFFF;
+    font: inherit;
+    border: 1.5px solid #FF5252;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 
 .open {
     display: block;
@@ -241,7 +254,7 @@ body {
 
   @media (min-width: 40rem) and (min-height: 60rem) {
     #landing-page-text {
-        height: 80vh;
+        min-height: 100vh;
         background-position: 50% 25%;
     }
 

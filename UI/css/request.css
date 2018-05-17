@@ -22,7 +22,7 @@ main {
 .request:hover,
 .request:active {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    border-color: #ff5454;
+    border-color: #1976D2;
 }
 
 .request a {
@@ -78,14 +78,5 @@ main {
 @media (min-width: 1500px) {
     .request {
       border-left: 4px solid #0e4f1f;
-    }
-
-    #free {
-      border-right: 4px solid #0e4f1f;
-    }
-
-    #free:hover,
-    #free:active {
-      border-right-color: #ff5454;
     }
 }
