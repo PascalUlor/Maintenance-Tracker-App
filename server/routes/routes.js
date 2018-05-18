@@ -1,6 +1,8 @@
 import express from 'express';
-import validation from '../middleware/validation';
+import userController from '../controllers/users';
 import requestController from '../controllers/requests';
+import verify from '../middleware/userValidation';
+import validation from '../middleware/validation';
 
 const router = express.Router();
 
@@ -11,5 +13,8 @@ router.route('/users/requests')
 router.route('/users/requests/:id')
     .put(validation.createRequestValidation, requestController.updateRequests)
     .get(requestController.getSingleRequest);
+
+router.route('/users/auth/signup')
+    .post(verify.checkUser, userController.userSignup);
 
 export default router;
