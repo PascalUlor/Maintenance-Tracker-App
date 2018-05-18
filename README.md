@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/PascalUlor/Maintenance-Tracker-App.svg?branch=master)](https://travis-ci.org/PascalUlor/Maintenance-Tracker-App)
+[![Build Status](https://travis-ci.org/PascalUlor/Maintenance-Tracker-App.svg?branch=ft-test-#157674546)](https://travis-ci.org/PascalUlor/Maintenance-Tracker-App)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/5392bd5f66f2c0e1ede5/maintainability)](https://codeclimate.com/github/PascalUlor/Maintenance-Tracker-App/maintainability)
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5392bd5f66f2c0e1ede5/test_coverage)](https://codeclimate.com/github/PascalUlor/Maintenance-Tracker-App/test_coverage)
 
-[![Coverage Status](https://coveralls.io/repos/github/PascalUlor/Maintenance-Tracker-App/badge.svg?branch=master)](https://coveralls.io/github/PascalUlor/Maintenance-Tracker-App?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/PascalUlor/Maintenance-Tracker-App/badge.svg?branch=ft-test-#157674546)](https://coveralls.io/github/PascalUlor/Maintenance-Tracker-App?branch=ft-test-#157674546)
 
 # Maintenance-Tracker-App
 **Maintenance-Tracker-App** is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs department regarding repair or maintenance requests and monitor the status of their request.
