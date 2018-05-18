@@ -1,15 +1,11 @@
-let backdrop = document.querySelector('.backdrop');
-let toggleButton = document.querySelector('.toggle-button');
-let mobileNav = document.querySelector('.mobile-nav');
+const backdrop = document.querySelector('.backdrop');
+const toggleButton = document.querySelector('.toggle-button');
+const mobileNav = document.querySelector('.mobile-nav');
 
-backdrop.addEventListener('click', () => {
-    mobileNav.classList.remove('open');
-    backDrop();
-});
 
-function backDrop() {
+const backDrop = () => {
     backdrop.classList.remove('open');
-}
+};
 
 toggleButton.addEventListener('click', () => {
     mobileNav.classList.add('open');
@@ -17,6 +13,11 @@ toggleButton.addEventListener('click', () => {
 });
 
 backdrop.removeEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    backDrop();
+});
+
+backdrop.addEventListener('click', () => {
     mobileNav.classList.remove('open');
     backDrop();
 });
