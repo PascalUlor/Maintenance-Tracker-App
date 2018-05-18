@@ -15,7 +15,7 @@ export default class requestController {
         db.requestDb.push({
             id: db.requestDb.length + 1,
             location: req.body.location,
-            workDescription: req.body.workDescription
+            Details: req.body.Details
         });
         res.status(201);
         res.json({
@@ -57,14 +57,12 @@ static getAllRequests(req, res) {
  * @returns {obj} with success or error message
  */
 static updateRequests(req, res) {
-    const {
-location, workDescription
-} = req.body;
+    const { location, Details } = req.body;
 const index = parseInt(req.params.id, 10);
   const edit = {
   id: index,
   location,
-  workDescription
+  Details
   };
     const found = db.requestDb.find(request => request.id === index);
       if (found) {
@@ -99,7 +97,7 @@ const index = parseInt(req.params.id, 10);
               }
               return res.status(400).json({
                 success: false,
-                message: 'Business does not exist'
+                message: 'Request does not exist'
             });
       }// getSinglerequest ends
 }

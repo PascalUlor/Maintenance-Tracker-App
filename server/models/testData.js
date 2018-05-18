@@ -17,12 +17,12 @@ const requestDb = [
     {
         id: 1,
         location: 'Lagos',
-        workDescription: 'Air conditioner is faulty'
+        Details: 'Air conditioner is faulty'
     },
     {
         id: 2,
         location: 'Jos',
-        workDescription: 'Systems are bad'
+        Details: 'Systems are bad'
     }
 ];
 
