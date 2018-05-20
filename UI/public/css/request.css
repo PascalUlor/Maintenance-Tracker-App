@@ -1,0 +1,135 @@
+@font-face {
+    font-family: Yantramanav;
+    src: url('../fonts/Yantramanav/Yantramanav-Bold.ttf');
+}
+
+main {
+    padding-top: 2rem;
+}
+
+.sitewrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.search {
+    display: flex;
+}
+
+.search-bar input[type=text],
+.drop-down {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+.background-image {
+    background: url("../images/background-board-equipment.jpg") center/cover;
+    filter: grayscale(40%);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: -1;
+}
+
+.request {
+    margin: 1rem 0;
+    border: 4px solid #0e4f1f;
+    flex-shrink: 0;
+}
+
+.request:hover,
+.request:active {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-color: #1976D2;
+}
+
+.request a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 2rem;
+}
+
+.resolved {
+    font-size: 0.8rem;
+    color: #000000;
+    background: #FFFFFF;
+    padding: 0.5rem;
+    border: 1.5px solid #000000;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.request-list {
+    color: #0e4f1f;
+    margin: 4rem;
+}
+
+.sub-title {
+    color: #979797;
+}
+
+.page-info {
+    padding: 1rem;
+    border: 1px solid #0e4f1f;
+    font-size: 1.2rem;
+    color: #0e4f1f;
+    background: #FFFFFF;
+    font-family: 'Yantramanav', sans-serif;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.wallpaper {
+    background: rgba(213, 255, 220, 0.95);
+}
+
+@media (min-width: 40rem) {
+    .sitewrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .request {
+        width: 50%;
+        margin: 1rem 0;
+        border: 4px solid #0e4f1f;
+    }
+    .request a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        padding: 2rem;
+    }
+    .page-info {
+        padding: 1rem;
+        border: 1px solid #0e4f1f;
+        font-size: 1.2rem;
+        color: #0e4f1f;
+        background: #FFFFFF;
+    }
+    main {
+        margin: 3rem auto;
+        max-width: 1500px;
+    }
+}
+
+@media (min-width: 1500px) {
+    .request {
+        border-left: 4px solid #0e4f1f;
+    }
+    .request-list {
+        color: #0e4f1f
+    }
+}
