@@ -100,4 +100,31 @@ export default class requestController {
       message: 'Request does not exist'
     });
   }// getSinglerequest ends
+
+  /**
+ * API method DELETE a particular rquest from requestDb
+ * @param {obj} req
+ * @param {obj} res
+ * @returns {obj} insert success message
+ */
+  static deleteRequest(req, res) {
+    const index = parseInt(req.params.id, 10);
+    const found = db.requestDb.find(request => request.id === index);
+    if (found) {
+      const newRequestList = db.requestDb.filter(request => request.id !== index);
+      db.requestDb = newRequestList;
+      res.status(200);
+      res.json({
+        success: true,
+        message: 'Request successfully deleted',
+        data: db.requestDb
+      });
+    } else {
+      res.status(400);
+      res.json({
+        success: false,
+        message: 'Request with id does not exist'
+      });
+    }
+  }// Method to delete business ends
 }

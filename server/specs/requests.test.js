@@ -240,4 +240,34 @@ describe('All test cases for application', () => {
       });
     });
   });
+
+  describe('Test cases for deleting request', () => {
+    describe('All negative delete test cases', () => {
+      it('should return `400` status code with error message for failed invalid Id', (done) => {
+        request.delete(`/api/v1/users/requests/${invalidID}`)
+          .set('Content-Type', 'application/json')
+          .send({})
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body.success).to.equal(false);
+            expect(res.body.message).to.equal('Request with id does not exist');
+            done();
+          });
+      });
+    });
+
+    describe('Positive delete test cases', () => {
+      it('should return `200` status code with success message', (done) => {
+        request.delete('/api/v1/users/requests/1')
+          .set('Content-Type', 'application/json')
+          .send({})
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.success).to.equal(true);
+            expect(res.body.message).to.equal('Request successfully deleted');
+            done();
+          });
+      });
+    });
+  });
 });// End of All test cases

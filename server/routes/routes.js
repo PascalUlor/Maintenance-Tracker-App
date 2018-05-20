@@ -12,6 +12,7 @@ router.route('/users/requests')
 
 router.route('/users/requests/:id')
   .put(validation.createRequestValidation, requestController.updateRequests)
+  .delete(requestController.deleteRequest)
   .get(requestController.getSingleRequest);
 
 router.route('/users/auth/signup')
