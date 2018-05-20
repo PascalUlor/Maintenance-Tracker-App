@@ -1,4 +1,7 @@
-  /* Nav and Footer Styling */
+@import url('https://fonts.googleapis.com/css?family=Yantramanav');
+@import url('https://fonts.googleapis.com/css?family=Philosopher');
+	
+	/* Nav and Footer Styling */
 
   * {
   	box-sizing: border-box;
@@ -236,7 +239,9 @@
   	position: absolute;
   	bottom: 5%;
   	left: 3%;
-  	font-size: 1.6rem;
+		font-size: 1.6rem;
+		font-family: 'Philosopher', sans-serif;
+    font-weight: bold;
   }
 
   @media (min-width: 40rem) and (min-height: 40rem) {
@@ -245,6 +250,8 @@
   		background-position: 50% 25%;
   	}
   	#landing-page-text h1, #admin-page h1 {
-  		font-size: 3rem;
+			font-size: 3rem;
+			font-family: 'Philosopher', sans-serif;
+    font-weight: bold;
   	}
   }

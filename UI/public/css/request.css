@@ -1,7 +1,5 @@
-@font-face {
-    font-family: Yantramanav;
-    src: url('../fonts/Yantramanav/Yantramanav-Bold.ttf');
-}
+@import url('https://fonts.googleapis.com/css?family=Yantramanav');
+@import url('https://fonts.googleapis.com/css?family=Philosopher');
 
 main {
     padding-top: 2rem;
@@ -83,7 +81,8 @@ main {
     font-size: 1.2rem;
     color: #0e4f1f;
     background: #FFFFFF;
-    font-family: 'Yantramanav', sans-serif;
+    font-family: 'Philosopher', sans-serif;
+    font-weight: bold;
 }
 
 .clearfix {
