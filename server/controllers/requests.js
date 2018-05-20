@@ -102,7 +102,7 @@ export default class requestController {
   }// getSinglerequest ends
 
   /**
- * API method DELETE a particular rquest from requestDb
+ * API method DELETE a rquest from requestDb
  * @param {obj} req
  * @param {obj} res
  * @returns {obj} insert success message
