@@ -11,7 +11,7 @@ export default class userController {
    * @returns {obj} success message
    */
   static userSignup(req, res) {
-    const { fullName, email } = req.body;
+    const { fullName, email, id = db.userDataBase.length + 1 } = req.body;
     const target = email;
     const findEmail = db.userDataBase.find(user => user.email === target);
     if (findEmail) {
@@ -24,9 +24,9 @@ export default class userController {
     return res.status(200).json({
       success: true,
       message: 'Signup successfull',
-      data: { fullName, email }
+      data: { id, fullName, email }
     });
-  }// signup end
+  }// user signup end
 
   /**
        * API method for user login
