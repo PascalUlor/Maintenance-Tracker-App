@@ -1,4 +1,4 @@
-const userDb = [
+const userDataBase = [
   {
     id: 1,
     fullName: 'Don Pascal',
@@ -19,7 +19,7 @@ const userDb = [
   }
 ];
 
-const requestDb = [
+const requestDataBase = [
   {
     id: 1,
     location: 'Lagos',
@@ -33,6 +33,6 @@ const requestDb = [
 ];
 
 
-const db = { userDb, requestDb };
+const db = { userDataBase, requestDataBase };
 
 export default db;
