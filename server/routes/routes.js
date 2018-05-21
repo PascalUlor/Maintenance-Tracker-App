@@ -1,6 +1,7 @@
 import express from 'express';
 import userController from '../controllers/users';
 import requestController from '../controllers/requests';
+import adminController from '../controllers/admin';
 import verify from '../middleware/userValidation';
 import validation from '../middleware/validation';
 
@@ -19,5 +20,8 @@ router.route('/users/auth/signup')
   .post(verify.checkUser, userController.userSignup);
 router.route('/users/auth/login')
   .post(userController.userLogin);
+
+router.route('/admin/users/:id/requests')
+  .get(adminController.getUserRequest);
 
 export default router;

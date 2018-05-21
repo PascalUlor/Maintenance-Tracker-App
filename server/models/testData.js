@@ -31,6 +31,24 @@ const requestDataBase = [
     userId: 1,
     location: 'Jos',
     Details: 'Systems are bad'
+  },
+  {
+    id: 2,
+    userId: 2,
+    location: 'Imo',
+    Details: 'Systems overload'
+  },
+  {
+    id: 2,
+    userId: 1,
+    location: 'Abuja',
+    Details: 'Kitchen equipements'
+  },
+  {
+    id: 2,
+    userId: 2,
+    location: 'Kadunna',
+    Details: 'Kitchen equipements'
   }
 ];
 
