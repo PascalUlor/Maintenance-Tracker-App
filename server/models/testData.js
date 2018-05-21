@@ -22,11 +22,13 @@ const userDataBase = [
 const requestDataBase = [
   {
     id: 1,
+    userId: 3,
     location: 'Lagos',
     Details: 'Air conditioner is faulty'
   },
   {
     id: 2,
+    userId: 1,
     location: 'Jos',
     Details: 'Systems are bad'
   }

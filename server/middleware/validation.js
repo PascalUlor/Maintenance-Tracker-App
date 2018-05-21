@@ -14,11 +14,11 @@ export default class Validation {
      */
   static createRequestValidation(req, res, next) {
     const {
-        location, Details
+        userId, location, Details
       } = req.body,
       errors = {};
     // check for undefined inputs
-    if (location === undefined || Details === undefined) {
+    if (location === undefined || Details === undefined || userId === undefined) {
       res.status(400);
       res.json({
         success: false,
@@ -37,6 +37,13 @@ export default class Validation {
       // validate location
       if (validator.isEmpty(location)) {
         errors.location = 'location is required';
+      }
+      if (!(validator.isEmpty(userId))) {
+        if (!(validator.isInt(userId))) {
+          errors.userId = 'user id must be an integer';
+        }
+      } else {
+        errors.userId = 'user id is required';
       }
 
       if (Object.keys(errors).length !== 0) {

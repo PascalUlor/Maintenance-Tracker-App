@@ -92,6 +92,7 @@ describe('All test cases for application', () => {
         request.post('/api/v1/users/requests')
           .set('Content-Type', 'application/json')
           .send({
+            userId: '',
             location: '',
             Details: ''
           }) // empty body request
@@ -99,6 +100,7 @@ describe('All test cases for application', () => {
           .end((err, res) => {
             expect(res.body.Details).to.eql('Request details is required');
             expect(res.body.location).to.eql('location is required');
+            expect(res.body.userId).to.eql('user id is required');
             expect(res.status).to.equal(400);
             if (err) done(err);
             done();
@@ -109,12 +111,27 @@ describe('All test cases for application', () => {
         request.post('/api/v1/users/requests')
           .set('Content-Type', 'application/json')
           .send({
+            userId: '2',
             location: 'hgfcjgvh',
             Details: 'abcd'
           })
           .expect(400)
           .end((err, res) => {
             expect(res.body).to.have.property('Details').eql('Request details must be between 20 to 1000 characters');
+            done();
+          });
+      });
+      it('should return `400` status code with error messages if userId is a string', (done) => {
+        request.post('/api/v1/users/requests')
+          .set('Content-Type', 'application/json')
+          .send({
+            userId: 'string',
+            location: 'hgfcjgvh',
+            Details: 'Request details must be between 20 to 1000 characters'
+          })
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body).to.have.property('userId').eql('user id must be an integer');
             done();
           });
       });
@@ -125,6 +142,7 @@ describe('All test cases for application', () => {
         request.post('/api/v1/users/requests')
           .set('Content-Type', 'application/json')
           .send({
+            userId: '1',
             location: 'Lagos',
             Details: 'Request details must be between 20 to 1000 characters'
           })
@@ -144,6 +162,7 @@ describe('All test cases for application', () => {
         request.put(`/api/v1/users/requests/${invalidID}`)
           .set('Content-Type', 'application/json')
           .send({
+            userId: '1',
             location: 'Lagos',
             Details: 'This is for the repair of all faulty equipments'
           })
@@ -162,6 +181,7 @@ describe('All test cases for application', () => {
         request.put('/api/v1/users/requests/1')
           .set('Content-Type', 'application/json')
           .send({
+            userId: '',
             location: '',
             Details: ''
           })
@@ -169,6 +189,7 @@ describe('All test cases for application', () => {
           .end((err, res) => {
             expect(res.body.Details).to.eql('Request details is required');
             expect(res.body.location).to.eql('location is required');
+            expect(res.body.userId).to.eql('user id is required');
             if (err) done(err);
             done();
           });
@@ -180,6 +201,7 @@ describe('All test cases for application', () => {
         request.put('/api/v1/users/requests/2')
           .set('Content-Type', 'application/json')
           .send({
+            userId: '1',
             location: 'Lagos',
             Details: 'Request details must be between 20 to 1000 characters'
           })
