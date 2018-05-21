@@ -7,14 +7,17 @@ import validation from '../middleware/validation';
 const router = express.Router();
 
 router.route('/users/requests')
-    .post(validation.createRequestValidation, requestController.createRequest)
-    .get(requestController.getAllRequests);
+  .post(validation.createRequestValidation, requestController.createRequest)
+  .get(requestController.getAllRequests);
 
 router.route('/users/requests/:id')
-    .put(validation.createRequestValidation, requestController.updateRequests)
-    .get(requestController.getSingleRequest);
+  .put(validation.createRequestValidation, requestController.updateRequests)
+  .delete(requestController.deleteRequest)
+  .get(requestController.getSingleRequest);
 
 router.route('/users/auth/signup')
-    .post(verify.checkUser, userController.userSignup);
+  .post(verify.checkUser, userController.userSignup);
+router.route('/users/auth/login')
+  .post(userController.userLogin);
 
 export default router;
