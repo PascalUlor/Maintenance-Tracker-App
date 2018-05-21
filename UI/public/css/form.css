@@ -2,21 +2,31 @@ main {
     padding-top: 1rem;
 }
 
+.input-page {
+    background-image: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    min-height: 87vh;
+}
+
 .form-title {
-    text-align: center;
     font-size: 1.8rem;
     color: #212121;
 }
 
 .input-form {
-    padding: 1rem;
+    align-content: center;
+    justify-content: center;
 }
 
 .input-form [type="email"],
 .input-form [type="password"],
 .input-form [type="text"] {
     height: 2rem;
-    width: 30rem;
+    flex-shrink: 1;
 }
 
 .input-form label {
@@ -31,7 +41,6 @@ main {
     width: 100%;
 }
 
-
 .input-form select {
     border: 1px solid #ccc;
     padding: 0.2rem 0.5rem;
@@ -45,7 +54,6 @@ main {
     border-color: #2ddf5c;
 }
 
-
 .input-form input.invalid,
 .input-form select.invalid,
 .input-form :invalid {
@@ -54,16 +62,31 @@ main {
 }
 
 .input-form button[type="submit"] {
-    display: block;
     margin-top: 1rem;
 }
 
 @media (min-width: 40rem) {
+    .signup-page {
+        background-image: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        min-height: 87vh;
+    }
     .input-form {
-        margin: 0 25rem;
-        width: 25rem;
+        align-content: center;
+        justify-content: center;
     }
     .form-title {
         margin-top: 5rem;
+    }
+    .input-form [type="email"],
+    .input-form [type="password"],
+    .input-form [type="text"] {
+        height: 3rem;
+        width: 30rem;
+        font-size: 1.5rem;
     }
 }
