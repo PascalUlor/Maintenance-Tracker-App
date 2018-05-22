@@ -6,6 +6,9 @@ import verify from '../middleware/userValidation';
 import validation from '../middleware/validation';
 
 const router = express.Router();
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 router.route('/users/requests')
   .post(validation.createRequestValidation, requestController.createRequest)

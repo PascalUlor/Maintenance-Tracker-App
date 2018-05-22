@@ -1,4 +1,12 @@
-import db from '../models/testData';
+// import db from '../models/testData';
+
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const db = require('../models/db');
+
+db.connect();
 
 /**
  * Class for /api/routes
