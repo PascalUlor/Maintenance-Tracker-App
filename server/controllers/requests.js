@@ -14,6 +14,7 @@ export default class requestController {
   static createRequest(req, res) {
     db.requestDataBase.push({
       id: db.requestDataBase.length + 1,
+      userId: parseInt(req.body.userId, 10),
       location: req.body.location,
       Details: req.body.Details
     });
@@ -61,6 +62,7 @@ export default class requestController {
     const index = parseInt(req.params.id, 10);
     const edit = {
       id: index,
+      userId: parseInt(req.body.userId, 10),
       location,
       Details
     };
