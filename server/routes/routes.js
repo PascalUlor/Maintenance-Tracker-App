@@ -21,7 +21,7 @@ router.route('/users/auth/signup')
 router.route('/users/auth/login')
   .post(userController.userLogin);
 
-router.route('/admin/users/requests/:i')
+router.route('/admin/users/requests/:id')
   .get(adminController.getUserRequest);
 
 export default router;
