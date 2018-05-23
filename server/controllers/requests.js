@@ -1,12 +1,12 @@
-// import db from '../models/testData';
+import db from '../models/testData';
 
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-const db = require('../models/db');
+const Db = require('../models/db');
 
-db.connect();
+Db.connect();
 
 /**
  * Class for /api/routes
@@ -41,22 +41,35 @@ export default class requestController {
  * @returns {obj} success message
  */
   static getAllRequests(req, res) {
-    if (db.requestDataBase.length !== 0) {
-      if (!req.query.sort) {
-        res.status(200);
-        res.json({
-          success: true,
-          message: 'Successfully Retrieved all requests',
-          data: db.requestDataBase
+    Db.query('select * from requests', (error, result) => {
+      if (error) {
+        return res.status(404).json({
+          success: false,
+          message: 'No request available'
         });
       }
-    } else {
-      res.status(404);
-      res.json({
-        success: false,
-        message: 'No request available'
+      return res.status(200).json({
+        success: true,
+        message: 'Successfully Retrieved all requests',
+        data: result.rows
       });
-    }
+    });
+    // if (db.requestDataBase.length !== 0) {
+    //   if (!req.query.sort) {
+    //     res.status(200);
+    //     res.json({
+    //       success: true,
+    //       message: 'Successfully Retrieved all requests',
+    //       data: db.requestDataBase
+    //     });
+    //   }
+    // } else {
+    //   res.status(404);
+    //   res.json({
+    //     success: false,
+    //     message: 'No request available'
+    //   });
+    // }
   }
 
   /**

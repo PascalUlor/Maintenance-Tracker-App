@@ -293,26 +293,3 @@ describe('All test cases for application', () => {
     });
   });
 });// End of All test with data cases
-
-// Test for cases with empty database
-describe('Test for Bad Get request', () => {
-  describe('Test empty request database', () => {
-    beforeEach((done) => {
-      db.requestDataBase.length = 0;
-      done();
-    });
-    describe('Negative test cases for Get All request', () => {
-      it('should return `404` status code with `res.body`failure message', (done) => {
-        request.get('/api/v1/users/requests')
-          .set('Content-Type', 'application/json')
-          .send({})
-          .expect(404)
-          .end((err, res) => {
-            expect(res.body.success).to.equal(false);
-            expect(res.body.message).to.equal('No request available');
-            done();
-          });
-      });
-    });
-  });
-});

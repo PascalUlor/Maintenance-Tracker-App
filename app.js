@@ -1,14 +1,20 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
-import chokidar from 'chokidar';
+// import chokidar from 'chokidar';
 
 
 import routes from './server/routes/routes';
 
+
+// const dotenv = require('dotenv');
+
+// dotenv.config();
+// const db = require()
+
 const app = express();
 
-const watcher = chokidar.watch('server');
+// const watcher = chokidar.watch('server');
 
 const port = process.env.PORT || 3000;
 
@@ -17,14 +23,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 
 // Watcher function
-watcher.on('ready', () => {
-  watcher.on('all', () => {
-    console.log('Clearing /dist/ module cache from server');
-    Object.keys(require.cache).forEach((id) => {
-      if (/[/\\]app[/\\]/.test(id)) delete require.cache[id];
-    });
-  });
-});
+// watcher.on('ready', () => {
+//   console.log('Clearing /dist/ module cache from server');
+//   watcher.on('all', () => {
+//     Object.keys(require.cache).forEach((id) => {
+//       if (/[/\\]app[/\\]/.test(id)) delete require.cache[id];
+//     });
+//   });
+// });
 
 // Home page route
 app.get('/', (req, res) => {
