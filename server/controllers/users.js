@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import reqHelper from '../helpers/reqHelper';
 import createToken from '../helpers/userToken';
-import db from '../models/testData';
 
 dotenv.config();
 
