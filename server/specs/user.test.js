@@ -22,7 +22,7 @@ describe('All Test cases for user Signup', () => {
           expect(res.body).to.haveOwnProperty('token');
           expect(res.body.message).to.equal('Signup successfull');
           expect(res.body.user).to.eql({
-            id: 1,
+            id: 2,
             fullName: 'Bruce Banner',
             email: 'banner@yahoo.com'
           });
@@ -40,7 +40,7 @@ describe('All Test cases for user Signup', () => {
           expect(res.body).to.haveOwnProperty('token');
           expect(res.body.message).to.equal('Signup successfull');
           expect(res.body.user).to.eql({
-            id: 2,
+            id: 3,
             fullName: 'Mike',
             email: 'mk@yahoo.com'
           });

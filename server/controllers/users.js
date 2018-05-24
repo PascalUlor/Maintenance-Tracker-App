@@ -25,8 +25,8 @@ export default class userController {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
       const { fullName, email } = req.body,
         password = hash;
-      const sql = 'INSERT INTO users (fullName, email, password) VALUES ($1, $2, $3) returning *';
-      const params = [fullName, email, password];
+      const sql = 'INSERT INTO users (fullName, role, email, password) VALUES ($1, $2, $3, $4) returning *';
+      const params = [fullName, 'user', email, password];
       dataBaseLink.query(sql, params)
         .then(result => (createToken(
           req, res, 201,
