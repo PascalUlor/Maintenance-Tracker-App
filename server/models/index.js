@@ -1,8 +1,8 @@
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 
-dotenv.config();
+// dotenv.config();
 
-const dataBaseLink = require('../models/dataBaseLink');
+// const dataBaseLink = require('../models/dataBaseLink');
 
-dataBaseLink.connect();
+// dataBaseLink.connect();
 
