@@ -1,6 +1,14 @@
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const dataBaseLink = require('../models/dataBaseLink');
+
+dataBaseLink.connect();
+
 /**
  * Validates all routes
  * @class Validator
@@ -24,7 +32,20 @@ export default class userValidation {
           fullName, email, password = hash
         } = req.body,
         errors = {};
-        // check for undefined inputs
+
+      const userEmail = {
+        text: 'SELECT * FROM users WHERE email = $1;',
+        values: [req.body.email],
+      };
+      dataBaseLink.query(userEmail, (error, result) => {
+        if (result.rows[0]) {
+          return res.status(409).json({
+            success: false,
+            message: 'User with email already exist'
+          });
+        }
+      });
+      // check for undefined inputs
       if (fullName === undefined || password === undefined || email === undefined) {
         res.status(400);
         res.json({
@@ -32,7 +53,7 @@ export default class userValidation {
           message: 'Some or all fields are undefined'
         });
       } else {
-        // validate fullname
+      // validate fullname
         if (validator.isEmpty(fullName)) {
           errors.fullName = 'fullName is required';
         }
@@ -45,7 +66,6 @@ export default class userValidation {
         if (validator.isEmpty(password)) {
           errors.password = 'password is required';
         }
-
 
         if (Object.keys(errors).length !== 0) {
           return res.status(400).json(errors);

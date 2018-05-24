@@ -12,67 +12,8 @@ const { expect } = chai,
   invalidID = 50;
 
 describe('All test cases for application', () => {
-  describe('Test case for loading application home page', () => {
-    it('should load application home page', (done) => {
-      request.get('/')
-        .set('Content-Type', 'application/json')
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body).deep.equal({
-            name: 'Welcome to Maintenance Tracker',
-            message: 'Your Service, Our Pleasure'
-          });
-          if (err) done(err);
-          done();
-        });
-    });
-  });
-  // test invalid routes
-  describe('Test Case For Invalid Routes', () => {
-    it('Should return a message when an invalid route is accessed', (done) => {
-      request
-        .get('/api/v1/some-rubbish')
-        .set('Connection', 'keep alive')
-        .set('Content-Type', 'application/json')
-        .expect(404)
-        .end((err, res) => {
-          expect(res.body).deep.equal({
-            message: 'Invalid routes'
-          });
-          if (err) done(err);
-          done();
-        });
-    });
-
-    it('should fail to get route', (done) => {
-      request.get('/api/v1')
-        .set('Contet-Type', 'application/json')
-        .expect(404)
-        .end((err, res) => {
-          expect(res.body).deep.equal({
-            message: 'Invalid routes'
-          });
-          if (err) done(err);
-          done();
-        });
-    });
-
-    it('should return `404` page for all invalid routes', (done) => {
-      request.get('/weconnect/recipes')
-        .set('Content-Type', 'application/json')
-        .expect(404)
-        .end((err, res) => {
-          expect(res.body).deep.equal({
-            message: 'Invalid routes'
-          });
-          if (err) done(err);
-          done();
-        });
-    });
-  });
-
   describe('All test cases for POSTing a new request', () => {
-    describe('Negative test cases for posting a request', () => {
+    describe('Test cases for posting a request', () => {
       it('should return `400` status code with error message for undefined requests', (done) => {
         request.post('/api/v1/users/requests')
           .set('Content-Type', 'application/json')
@@ -137,7 +78,7 @@ describe('All test cases for application', () => {
       });
     });
 
-    describe('Positive test case for adding a request', () => {
+    describe('Test case for adding a request', () => {
       it('should return `201` status code with success messages for successfull post', (done) => {
         request.post('/api/v1/users/requests')
           .set('Content-Type', 'application/json')
@@ -196,7 +137,7 @@ describe('All test cases for application', () => {
       });
     });
 
-    describe('Positive test case for modifying a request', () => {
+    describe('Test case for modifying a request', () => {
       it('should return `200` status code with success messages successfull update', (done) => {
         request.put('/api/v1/users/requests/2')
           .set('Content-Type', 'application/json')
@@ -216,26 +157,9 @@ describe('All test cases for application', () => {
     });
   });// Update Test end
 
-  describe('Test cases for Getting All user request', () => {
-    describe('Positive test cases for Get All user request', () => {
-      it('should return `200` status code with `res.body` success message', (done) => {
-        request.get('/api/v1/users/requests')
-          .set('Content-Type', 'application/json')
-          .send({})
-          .expect(200)
-          .end((err, res) => {
-            expect(res.body.success).to.equal(true);
-            expect(res.body.message).to.equal('Successfully Retrieved all requests');
-            expect(db.requestDb);
-            done();
-          });
-      });
-    });
-  });
-
   describe('Test case for retrieving a Single request', () => {
-    describe('Negative test case for retriving a single request', () => {
-      it('Should return `400` status code with for invalid id', (done) => {
+    describe('Test case for retriving a single request', () => {
+      it('should return `400` status code with for invalid id', (done) => {
         request.get(`/api/v1/users/requests/${invalidID}`)
           .set('Content-Type', 'application/json')
           .send({})
@@ -248,8 +172,8 @@ describe('All test cases for application', () => {
       });
     });
 
-    describe('Positive test case for retriving a single request', () => {
-      it('Should return `200` status code with `res body` success message', (done) => {
+    describe('Test case for retriving a single request', () => {
+      it('should return `200` status code with `res body` success message', (done) => {
         request.get('/api/v1/users/requests/2')
           .set('Content-Type', 'application/json')
           .send({})
@@ -264,7 +188,7 @@ describe('All test cases for application', () => {
   });
 
   describe('Test cases for deleting request', () => {
-    describe('All negative delete test cases', () => {
+    describe('when delete test cases fail', () => {
       it('should return `400` status code with error message for failed invalid Id', (done) => {
         request.delete(`/api/v1/users/requests/${invalidID}`)
           .set('Content-Type', 'application/json')
@@ -278,7 +202,7 @@ describe('All test cases for application', () => {
       });
     });
 
-    describe('Positive delete test cases', () => {
+    describe('Test when Delete test cases pass', () => {
       it('should return `200` status code with success message', (done) => {
         request.delete('/api/v1/users/requests/1')
           .set('Content-Type', 'application/json')

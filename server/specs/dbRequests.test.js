@@ -26,7 +26,7 @@ describe('All test cases for DATABASE', () => {
   });
   // test invalid routes
   describe('Test Case For Invalid Routes', () => {
-    it('Should return a message when an invalid route is accessed', (done) => {
+    it('should return error message when for invalid route', (done) => {
       request
         .get('/api/v1/some-rubbish')
         .set('Connection', 'keep alive')
@@ -40,36 +40,10 @@ describe('All test cases for DATABASE', () => {
           done();
         });
     });
-
-    it('should fail to get route', (done) => {
-      request.get('/api/v1')
-        .set('Contet-Type', 'application/json')
-        .expect(404)
-        .end((err, res) => {
-          expect(res.body).deep.equal({
-            message: 'Invalid routes'
-          });
-          if (err) done(err);
-          done();
-        });
-    });
-
-    it('should return `404` page for all invalid routes', (done) => {
-      request.get('/weconnect/recipes')
-        .set('Content-Type', 'application/json')
-        .expect(404)
-        .end((err, res) => {
-          expect(res.body).deep.equal({
-            message: 'Invalid routes'
-          });
-          if (err) done(err);
-          done();
-        });
-    });
   });
 
   describe('Test cases for Getting All user request', () => {
-    describe('Positive test cases for Get All user request', () => {
+    describe('test cases for when Get All user request pass', () => {
       it('should return `200` status code with `res.body` success message', (done) => {
         request.get('/api/v1/users/requests')
           .set('Content-Type', 'application/json')

@@ -1,4 +1,15 @@
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+import reqHelper from '../helpers/reqHelper';
+import createToken from '../helpers/userToken';
 import db from '../models/testData';
+
+dotenv.config();
+
+const dataBaseLink = require('../models/dataBaseLink');
+
+dataBaseLink.connect();
+
 /**
  * Class for /api/routes
  * @class userController
@@ -11,21 +22,17 @@ export default class userController {
    * @returns {obj} success message
    */
   static userSignup(req, res) {
-    const { fullName, email, id = db.userDataBase.length + 1 } = req.body;
-    const target = email;
-    const findEmail = db.userDataBase.find(user => user.email === target);
-    if (findEmail) {
-      return res.status(400).json({
-        success: false,
-        message: 'User with email already exist'
-      });
-    }
-    db.userDataBase.push(req.body);
-    return res.status(200).json({
-      success: true,
-      message: 'Signup successfull',
-      data: { id, fullName, email }
-    });
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+      const { fullName, email } = req.body,
+        password = hash;
+      const sql = 'INSERT INTO users (fullName, email, password) VALUES ($1, $2, $3) returning *';
+      const params = [fullName, email, password];
+      dataBaseLink.query(sql, params)
+        .then(result => (createToken(
+          req, res, 201,
+          'Signup successfull', result
+        ))).catch(error => reqHelper.error(res, 500, error.message));
+    });// bcrypt end
   }// user signup end
 
   /**
