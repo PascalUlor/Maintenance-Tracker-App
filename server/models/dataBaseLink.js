@@ -1,11 +1,11 @@
-import dataBase from './dataBase';
+import database from './database';
 
 const { Client } = require('pg');
 
 const client = new Client();
 
 const seed = () => {
-  const qry = dataBase;
+  const qry = database;
   client.query(qry, (err, result) => {
     if (err) {
       console.log(err.toString());

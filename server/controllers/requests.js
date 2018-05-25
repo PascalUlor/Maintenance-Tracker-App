@@ -4,9 +4,9 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const dataBaseLink = require('../models/dataBaseLink');
+const databaseLink = require('../models/databaseLink');
 
-dataBaseLink.connect();
+databaseLink.connect();
 
 /**
  * Class for /api/routes
@@ -41,7 +41,7 @@ export default class requestController {
  * @returns {obj} success message
  */
   static getAllRequests(req, res) {
-    dataBaseLink.query('select * from requests', (error, result) => {
+    databaseLink.query('select * from requests', (error, result) => {
       if (error) {
         return res.status(404).json({
           success: false,

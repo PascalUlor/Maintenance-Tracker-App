@@ -5,9 +5,9 @@ import createToken from '../helpers/userToken';
 
 dotenv.config();
 
-const dataBaseLink = require('../models/dataBaseLink');
+const databaseLink = require('../models/databaseLink');
 
-dataBaseLink.connect();
+databaseLink.connect();
 
 /**
  * Class for /api/routes
@@ -26,7 +26,7 @@ export default class userController {
         password = hash;
       const userQuery = 'INSERT INTO users (fullName, role, email, password) VALUES ($1, $2, $3, $4) returning *';
       const params = [fullName, 'user', email, password];
-      dataBaseLink.query(userQuery, params)
+      databaseLink.query(userQuery, params)
         .then(result => (createToken(
           req, res, 201,
           'Signup successfull', result
@@ -45,7 +45,7 @@ export default class userController {
       errors = { form: 'Invalid username or password' };
     const userQuery = 'SELECT email, password FROM users WHERE email = $1 LIMIT 1;';
     const params = [email];
-    dataBaseLink.query(userQuery, params)
+    databaseLink.query(userQuery, params)
       .then((result) => {
         if (result.rows[0]) {
           console.log(result.rows[0]);
