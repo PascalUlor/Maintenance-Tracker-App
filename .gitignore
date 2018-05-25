@@ -9,3 +9,5 @@ coverage
 server/dist/
 
 config/
+
+.vscode

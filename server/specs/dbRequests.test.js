@@ -23,9 +23,7 @@ describe('All test cases for DATABASE', () => {
           done();
         });
     });
-  });
-  // test invalid routes
-  describe('Test Case For Invalid Routes', () => {
+    // test invalid routes
     it('should return error message when for invalid route', (done) => {
       request
         .get('/api/v1/some-rubbish')
