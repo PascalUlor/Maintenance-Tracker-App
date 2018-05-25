@@ -126,7 +126,6 @@ describe('All Test cases for user login', () => {
       .send(inputs.noEmail)
       .end((err, res) => {
         expect(res.status).to.equal(401);
-        // expect(res.body.userName).to.eql('Email is required');
         done();
       });
   });
@@ -136,7 +135,6 @@ describe('All Test cases for user login', () => {
       .send(inputs.noPassword)
       .end((err, res) => {
         expect(res.status).to.equal(401);
-        // expect(res.body.password).to.eql('Password is required');
         done();
       });
   });
