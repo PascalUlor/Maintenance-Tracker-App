@@ -1,5 +1,13 @@
 import db from '../models/testData';
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const databaseLink = require('../models/databaseLink');
+
+databaseLink.connect();
+
 /**
  * Class for /api/routes
  * @class requestController
@@ -33,22 +41,19 @@ export default class requestController {
  * @returns {obj} success message
  */
   static getAllRequests(req, res) {
-    if (db.requestDataBase.length !== 0) {
-      if (!req.query.sort) {
-        res.status(200);
-        res.json({
-          success: true,
-          message: 'Successfully Retrieved all requests',
-          data: db.requestDataBase
+    databaseLink.query('select * from requests', (error, result) => {
+      if (error) {
+        return res.status(404).json({
+          success: false,
+          message: 'No request available'
         });
       }
-    } else {
-      res.status(404);
-      res.json({
-        success: false,
-        message: 'No request available'
+      return res.status(200).json({
+        success: true,
+        message: 'Successfully Retrieved all requests',
+        data: result.rows
       });
-    }
+    });
   }
 
   /**

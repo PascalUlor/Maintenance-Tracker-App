@@ -1,4 +1,14 @@
-import db from '../models/testData';
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+import reqHelper from '../helpers/reqHelper';
+import createToken from '../helpers/userToken';
+
+dotenv.config();
+
+const databaseLink = require('../models/databaseLink');
+
+databaseLink.connect();
+
 /**
  * Class for /api/routes
  * @class userController
@@ -11,21 +21,17 @@ export default class userController {
    * @returns {obj} success message
    */
   static userSignup(req, res) {
-    const { fullName, email, id = db.userDataBase.length + 1 } = req.body;
-    const target = email;
-    const findEmail = db.userDataBase.find(user => user.email === target);
-    if (findEmail) {
-      return res.status(400).json({
-        success: false,
-        message: 'User with email already exist'
-      });
-    }
-    db.userDataBase.push(req.body);
-    return res.status(200).json({
-      success: true,
-      message: 'Signup successfull',
-      data: { id, fullName, email }
-    });
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+      const { fullName, email } = req.body,
+        password = hash;
+      const userQuery = 'INSERT INTO users (fullName, role, email, password) VALUES ($1, $2, $3, $4) returning *';
+      const params = [fullName, 'user', email, password];
+      databaseLink.query(userQuery, params)
+        .then(result => (createToken(
+          req, res, 201,
+          'Signup successfull', result
+        ))).catch(error => reqHelper.error(res, 500, error.message));
+    });// bcrypt end
   }// user signup end
 
   /**
@@ -35,21 +41,27 @@ export default class userController {
        * @returns {obj} success message
        */
   static userLogin(req, res) {
-    const { email, password } = req.body;
-    const target1 = email;
-    const target2 = password;
-    const findEmail = db.userDataBase.find(user => user.email === target1);
-    const findPassword = db.userDataBase.find(user => user.password === target2);
-    if (findEmail && findPassword) {
-      return res.status(200).json({
-        success: true,
-        message: 'Login Successfull',
-        data: { email }
-      });
-    }
-    res.status(401).json({
-      success: false,
-      message: 'Access Denied',
-    });
+    const { email, password } = req.body,
+      errors = { form: 'Invalid username or password' };
+    const userQuery = 'SELECT email, password FROM users WHERE email = $1 LIMIT 1;';
+    const params = [email];
+    databaseLink.query(userQuery, params)
+      .then((result) => {
+        if (result.rows[0]) {
+          console.log(result.rows[0]);
+          const getPassword = bcrypt.compareSync(password, result.rows[0].password);
+          if (getPassword) {
+            return createToken(req, res, 200, 'Login Successfull', result);
+          }
+          return res.status(401).json({
+            succes: false,
+            errors
+          });
+        }
+        return res.status(401).json({
+          success: false,
+          errors
+        });
+      }).catch(error => reqHelper.error(res, 500, error.message));
   }
 }
