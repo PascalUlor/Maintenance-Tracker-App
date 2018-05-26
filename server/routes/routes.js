@@ -1,4 +1,5 @@
 import express from 'express';
+import authToken from '../middleware/authToken';
 import userController from '../controllers/users';
 import requestController from '../controllers/requests';
 import adminController from '../controllers/admin';
@@ -11,7 +12,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 router.route('/users/requests')
-  .post(validation.createRequestValidation, requestController.createRequest)
+  .post(authToken, validation.createRequestValidation, requestController.createRequest)
   .get(requestController.getAllRequests);
 
 router.route('/users/requests/:id')
@@ -19,9 +20,9 @@ router.route('/users/requests/:id')
   .delete(requestController.deleteRequest)
   .get(requestController.getSingleRequest);
 
-router.route('/users/auth/signup')
+router.route('/auth/signup')
   .post(verify.checkUser, userController.userSignup);
-router.route('/users/auth/login')
+router.route('/auth/login')
   .post(userController.userLogin);
 
 router.route('/admin/users/requests/:id')
