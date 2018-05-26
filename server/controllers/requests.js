@@ -1,3 +1,4 @@
+import reqHelper from '../helpers/reqHelper';
 import db from '../models/testData';
 
 const dotenv = require('dotenv');
@@ -20,18 +21,26 @@ export default class requestController {
      * @returns {obj} insertion error messages or success messages
      */
   static createRequest(req, res) {
-    db.requestDataBase.push({
-      id: db.requestDataBase.length + 1,
-      userId: parseInt(req.body.userId, 10),
-      location: req.body.location,
-      Details: req.body.Details
-    });
-    res.status(201);
-    res.json({
-      success: true,
-      message: 'Request created successfully',
-      data: db.requestDataBase
-    });
+    const { location, details } = req.body, { userId } = req.decoded;
+    const userQuery = 'INSERT INTO requests (location, details, userId) VALUES($1, $2, $3) RETURNING *';
+    const params = [location, details, userId];
+    databaseLink.query(userQuery, params)
+      .then(result => reqHelper.success(
+        res, 201,
+        'Request created successfully', result.rows[0]
+      )).catch(error => reqHelper.error(res, 500, error.message));
+    // db.requestDataBase.push({
+    //   id: db.requestDataBase.length + 1,
+    //   userId: parseInt(req.body.userId, 10),
+    //   location: req.body.location,
+    //   Details: req.body.Details
+    // });
+    // res.status(201);
+    // res.json({
+    //   success: true,
+    //   message: 'Request created successfully',
+    //   data: db.requestDataBase
+    // });
   }// Method to create request ends
 
   /**

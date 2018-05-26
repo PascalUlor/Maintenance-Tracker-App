@@ -6,15 +6,15 @@ import chai from 'chai';
 import app from '../../app';
 import inputs from './seed/user.data';
 
+export const request = supertest(app);
+export const { expect } = chai;
+export const wrongToken = 'ThisIsAWrongToken';
+
 const userToken = { token: null };
-
-const { expect } = chai,
-  request = supertest(app);
-
 
 describe('All Test cases for user Signup', () => {
   it('Should return `201` for unique email signups', (done) => {
-    request.post('/api/v1/users/auth/signup')
+    request.post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send(inputs.validInput1)
       .expect(201)
@@ -32,7 +32,7 @@ describe('All Test cases for user Signup', () => {
       });
   });
   it('Should return `201` when another unique email signups', (done) => {
-    request.post('/api/v1/users/auth/signup')
+    request.post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send(inputs.validInput2)
       .expect(201)
@@ -51,7 +51,7 @@ describe('All Test cases for user Signup', () => {
   });
 
   it('should return `400` if some fields are undefined', (done) => {
-    request.post('/api/v1/users/auth/signup')
+    request.post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send({
         password: '123'
@@ -69,7 +69,7 @@ describe('All Test cases for user Signup', () => {
       });
   });
   it('should return `400` if email already exists', (done) => {
-    request.post('/api/v1/users/auth/signup')
+    request.post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send(inputs.existingEmail)
       .expect(400)
@@ -80,7 +80,7 @@ describe('All Test cases for user Signup', () => {
       });
   });
   it('Should return `500` if password is not hashed', (done) => {
-    request.post('/api/v1/users/auth/signup')
+    request.post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send({})
       .expect(500)
@@ -92,7 +92,7 @@ describe('All Test cases for user Signup', () => {
   });
 
   it('should return `400` status code with errors message for empty request', (done) => {
-    request.post('/api/v1/users/auth/signup')
+    request.post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send({
         fullName: '',
@@ -112,7 +112,7 @@ describe('All Test cases for user Signup', () => {
 
 describe('All Test cases for user login', () => {
   it('Should return `401` for wrong user input', (done) => {
-    request.post('/api/v1/users/auth/login')
+    request.post('/api/v1/auth/login')
       .set('Content-Type', 'application/json')
       .send(inputs.invalidEmailPassword)
       .end((err, res) => {
@@ -121,7 +121,7 @@ describe('All Test cases for user login', () => {
       });
   });
   it('Should return `401` and deny access if wrong userName is not entered', (done) => {
-    request.post('/api/v1/users/auth/login')
+    request.post('/api/v1/auth/login')
       .set('Content-Type', 'application/json')
       .send(inputs.noEmail)
       .end((err, res) => {
@@ -130,7 +130,7 @@ describe('All Test cases for user login', () => {
       });
   });
   it('Should return `401` and deny access if wrong Password is not entered', (done) => {
-    request.post('/api/v1/users/auth/login')
+    request.post('/api/v1/auth/login')
       .set('Content-Type', 'application/json')
       .send(inputs.noPassword)
       .end((err, res) => {
@@ -139,7 +139,7 @@ describe('All Test cases for user login', () => {
       });
   });
   it('Should return `200` for authenticated user details', (done) => {
-    request.post('/api/v1/users/auth/login')
+    request.post('/api/v1/auth/login')
       .set('Content-Type', 'application/json')
       .send(inputs.userOneLogin)
       .end((err, res) => {
@@ -151,3 +151,5 @@ describe('All Test cases for user login', () => {
       });
   });
 });
+
+export default userToken;
