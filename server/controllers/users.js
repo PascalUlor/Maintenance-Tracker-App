@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import reqHelper from '../helpers/reqHelper';
-import createToken from '../helpers/userToken';
+import createToken from '../helpers/createToken';
 
 dotenv.config();
 
@@ -48,7 +48,6 @@ export default class userController {
     databaseLink.query(userQuery, params)
       .then((result) => {
         if (result.rows[0]) {
-          console.log(result.rows[0]);
           const getPassword = bcrypt.compareSync(password, result.rows[0].password);
           if (getPassword) {
             return createToken(req, res, 200, 'Login Successfull', result);

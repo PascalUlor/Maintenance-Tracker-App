@@ -12,9 +12,13 @@ INSERT INTO users (fullName, role, email, password) VALUES ('Pascal', 'Admin', '
 DROP TABLE IF EXISTS requests;
 CREATE TABLE requests (
   id SERIAL primary key,
+  title VARCHAR(50) NOT NULL,
   userId int references users(id),
-  location text NOT NULL,
-  details text
+  department text NOT NULL,
+  details text,
+  status VARCHAR(20) NOT NULL DEFAULT 'pending',
+  createdat TIMESTAMP NOT NULL DEFAULT NOW(),
+  updatedat TIMESTAMP NOT NULL DEFAULT NOW()
   );
   `;
 

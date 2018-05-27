@@ -21,26 +21,14 @@ export default class requestController {
      * @returns {obj} insertion error messages or success messages
      */
   static createRequest(req, res) {
-    const { location, details } = req.body, { userId } = req.decoded;
-    const userQuery = 'INSERT INTO requests (location, details, userId) VALUES($1, $2, $3) RETURNING *';
-    const params = [location, details, userId];
+    const { title, department, details } = req.body, { userId } = req.decoded;
+    const userQuery = 'INSERT INTO requests (title, department, details, userId, status) VALUES($1, $2, $3, $4, $5) RETURNING *';
+    const params = [title, department, details, userId, 'pending'];
     databaseLink.query(userQuery, params)
       .then(result => reqHelper.success(
         res, 201,
         'Request created successfully', result.rows[0]
       )).catch(error => reqHelper.error(res, 500, error.message));
-    // db.requestDataBase.push({
-    //   id: db.requestDataBase.length + 1,
-    //   userId: parseInt(req.body.userId, 10),
-    //   location: req.body.location,
-    //   Details: req.body.Details
-    // });
-    // res.status(201);
-    // res.json({
-    //   success: true,
-    //   message: 'Request created successfully',
-    //   data: db.requestDataBase
-    // });
   }// Method to create request ends
 
   /**
@@ -72,27 +60,44 @@ export default class requestController {
  * @returns {obj} with success or error message
  */
   static updateRequests(req, res) {
-    const { location, Details } = req.body;
-    const index = parseInt(req.params.id, 10);
-    const edit = {
-      id: index,
-      userId: parseInt(req.body.userId, 10),
-      location,
-      Details
-    };
-    const findRequest = db.requestDataBase.find(request => request.id === index);
-    if (findRequest) {
-      db.requestDataBase[index - 1] = edit;
-      return res.status(200).json({
-        success: true,
-        message: 'Request with id successfully updated',
-        data: db.requestDataBase
-      });
-    }
-    return res.status(400).json({
-      success: false,
-      message: 'Request with id does not exist'
-    });
+    const { title, department, details } = req.body, { userId } = req.decoded, id = parseInt(req.params.requestId, 10);
+    const checkId = 'SELECT * FROM requests WHERE id = $1 LIMIT 1;';
+    const value = [id];
+    const userQuery = 'UPDATE requests SET title = $1, department = $2, details = $3 WHERE id = $4 RETURNING *';
+    const params = [title, department, details, id];
+    databaseLink.query(checkId, value)
+      .then((result) => {
+        if (!result.rows[0]) {
+          reqHelper.error(res, 400, 'Request with id does not exist');
+        } if (userId !== result.rows[0].userid) {
+          reqHelper.error(res, 400, 'Access Denied. You are not authorized to update this request');
+        }
+        databaseLink.query(userQuery, params)
+          .then(update =>
+            reqHelper.success(res, 200, 'Request with id successfully updated', update.rows[0]))
+          .catch(error => reqHelper.error(res, 500, error.toString()));
+      }).catch(error => reqHelper.error(res, 500, error.toString()));
+    // const { location, Details } = req.body;
+    // const index = parseInt(req.params.id, 10);
+    // const edit = {
+    //   id: index,
+    //   userId: parseInt(req.body.userId, 10),
+    //   location,
+    //   Details
+    // };
+    // const findRequest = db.requestDataBase.find(request => request.id === index);
+    // if (findRequest) {
+    //   db.requestDataBase[index - 1] = edit;
+    //   return res.status(200).json({
+    //     success: true,
+    //     message: 'Request with id successfully updated',
+    //     data: db.requestDataBase
+    //   });
+    // }
+    // return res.status(400).json({
+    //   success: false,
+    //   message: 'Request with id does not exist'
+    // });
   } // Method to Update request ends
 
   /**
@@ -102,7 +107,7 @@ export default class requestController {
      * @returns {obj} success message
      */
   static getSingleRequest(req, res) {
-    const index = parseInt(req.params.id, 10);
+    const index = parseInt(req.params.requestId, 10);
     const findRequest = db.requestDataBase.find(request => request.id === index);
     if (findRequest) {
       return res.status(200).json({
@@ -124,7 +129,7 @@ export default class requestController {
  * @returns {obj} insert success message
  */
   static deleteRequest(req, res) {
-    const index = parseInt(req.params.id, 10);
+    const index = parseInt(req.params.requestId, 10);
     const findRequest = db.requestDataBase.find(request => request.id === index);
     if (findRequest) {
       const newRequestList = db.requestDataBase.filter(request => request.id !== index);
