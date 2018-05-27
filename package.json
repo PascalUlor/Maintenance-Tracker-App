@@ -4,7 +4,7 @@
   "description": "Maintenance Tracker App is an application that provides users with the ability to reach out to",
   "main": "app.js",
   "scripts": {
-    "start": "set NODE_ENV=production&&babel-node app.js",
+    "start": "babel-node app.js",
     "start:dev": "nodemon --watch server --exec babel-node -- app.js",
     "test": "set NODE_ENV=test&&nyc --reporter=lcov --reporter=text mocha --timeout 50000 --exit --compilers js:babel-core/register server/specs/*test.js || true",
     "build": "babel server -d server/dist --copy-files --ignore server/dist",
