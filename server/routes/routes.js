@@ -15,8 +15,8 @@ router.route('/users/requests')
   .post(authToken, validation.createRequestValidation, requestController.createRequest)
   .get(requestController.getAllRequests);
 
-router.route('/users/requests/:id')
-  .put(validation.createRequestValidation, requestController.updateRequests)
+router.route('/users/requests/:requestId')
+  .put(authToken, validation.updateRequestValidation, requestController.updateRequests)
   .delete(requestController.deleteRequest)
   .get(requestController.getSingleRequest);
 
