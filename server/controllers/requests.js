@@ -77,27 +77,6 @@ export default class requestController {
             reqHelper.success(res, 200, 'Request with id successfully updated', update.rows[0]))
           .catch(error => reqHelper.error(res, 500, error.toString()));
       }).catch(error => reqHelper.error(res, 500, error.toString()));
-    // const { location, Details } = req.body;
-    // const index = parseInt(req.params.id, 10);
-    // const edit = {
-    //   id: index,
-    //   userId: parseInt(req.body.userId, 10),
-    //   location,
-    //   Details
-    // };
-    // const findRequest = db.requestDataBase.find(request => request.id === index);
-    // if (findRequest) {
-    //   db.requestDataBase[index - 1] = edit;
-    //   return res.status(200).json({
-    //     success: true,
-    //     message: 'Request with id successfully updated',
-    //     data: db.requestDataBase
-    //   });
-    // }
-    // return res.status(400).json({
-    //   success: false,
-    //   message: 'Request with id does not exist'
-    // });
   } // Method to Update request ends
 
   /**
