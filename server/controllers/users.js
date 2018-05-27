@@ -28,7 +28,7 @@ export default class userController {
       const params = [fullName, 'user', email, password];
       databaseLink.query(userQuery, params)
         .then(result => (createToken(
-          req, res, 201,
+          res, 201,
           'Signup successfull', result
         ))).catch(error => reqHelper.error(res, 500, error.message));
     });// bcrypt end
@@ -50,7 +50,7 @@ export default class userController {
         if (result.rows[0]) {
           const getPassword = bcrypt.compareSync(password, result.rows[0].password);
           if (getPassword) {
-            return createToken(req, res, 200, 'Login Successfull', result);
+            return createToken(res, 200, 'Login Successfull', result);
           }
           return res.status(401).json({
             succes: false,
