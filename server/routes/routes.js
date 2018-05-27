@@ -11,9 +11,10 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+// User
 router.route('/users/requests')
   .post(authToken, validation.createRequestValidation, requestController.createRequest)
-  .get(requestController.getAllRequests);
+  .get(authToken, requestController.getAllRequestsUser);
 
 router.route('/users/requests/:requestId')
   .put(authToken, validation.updateRequestValidation, requestController.updateRequests)
@@ -25,7 +26,11 @@ router.route('/auth/signup')
 router.route('/auth/login')
   .post(userController.userLogin);
 
-router.route('/admin/users/requests/:id')
+// Admin
+router.route('/requests/:id')
   .get(adminController.getUserRequest);
+
+router.route('/requests')
+  .get(adminController.getAllRequests);
 
 export default router;

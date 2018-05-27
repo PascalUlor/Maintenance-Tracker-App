@@ -31,26 +31,25 @@ export default class requestController {
       )).catch(error => reqHelper.error(res, 500, error.message));
   }// Method to create request ends
 
+
   /**
- * API method GET all request by user
+ * API method GET all request of logged in user
  * @param {obj} req
  * @param {obj} res
  * @returns {obj} success message
  */
-  static getAllRequests(req, res) {
-    databaseLink.query('select * from requests', (error, result) => {
-      if (error) {
-        return res.status(404).json({
-          success: false,
-          message: 'No request available'
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: 'Successfully Retrieved all requests',
-        data: result.rows
-      });
-    });
+  static getAllRequestsUser(req, res) {
+    const { userId } = req.decoded;
+    const checkId = 'SELECT * FROM requests WHERE userId = $1;';
+    const value = [userId];
+    databaseLink.query(checkId, value)
+      .then((result) => {
+        if (result.rows.length > 0) {
+          reqHelper.success(res, 200, 'Requests with userId successfully retrieved', result.rows);
+        } else {
+          reqHelper.error(res, 400, 'Request for user does not exist');
+        }
+      }).catch(error => reqHelper.error(res, 500, error.toString()));
   }
 
   /**

@@ -48,19 +48,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
     });
   });// Homepage tests ends
 
-  describe('test cases to Get All user request from DATABASE', () => {
-    it('should return `200` status code with `res.body` success message', (done) => {
-      request.get('/api/v1/users/requests')
-        .set('Content-Type', 'application/json')
-        .send({})
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body.success).to.equal(true);
-          expect(res.body.message).to.equal('Successfully Retrieved all requests');
-          done();
-        });
-    });
-  });
+  
 
 
   // test case to create request in database
@@ -244,6 +232,20 @@ describe('All test cases for Maintenance-Tracker application', () => {
         });
     });
   });// Update Test end
+
+  describe('test cases to Get All request for logged in user', () => {
+    it('should return `200` status code with `res.body` success message', (done) => {
+      request.get('/api/v1/users/requests')
+        .set('x-access-token', userToken.token)
+        .send({})
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.success).to.equal(true);
+          expect(res.body.message).to.equal('Requests with userId successfully retrieved');
+          done();
+        });
+    });
+  });
 
   describe('Test case for retrieving a Single request', () => {
     it('should return `400` status code with for invalid id', (done) => {
