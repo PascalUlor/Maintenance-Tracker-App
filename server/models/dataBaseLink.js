@@ -26,7 +26,8 @@ const connect = () => {
     });
 };
 
+connect();
+
 module.exports = {
-  connect,
   query: (text, params, callback) => client.query(text, params, callback)
 };

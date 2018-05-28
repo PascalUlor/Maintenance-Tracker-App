@@ -7,7 +7,6 @@ dotenv.config();
 
 const databaseLink = require('../models/databaseLink');
 
-databaseLink.connect();
 
 /**
  * Validates all routes
