@@ -7,7 +7,6 @@ dotenv.config();
 
 const databaseLink = require('../models/databaseLink');
 
-databaseLink.connect();
 
 /**
  * Class for /api/routes
@@ -65,31 +64,16 @@ export default class adminController {
  * API method to mark request as approved by user
  * @param {obj} req
  * @param {obj} res
+ * @param {obj} newStatus
  * @returns {obj} success message
  */
-  static approveRequests(req, res) {
+  static requestStatus(req, res, newStatus) {
     const id = parseInt(req.params.requestId, 10);
     const userQuery = 'UPDATE requests SET status = $1, updatedat = NOW() WHERE id = $2 returning *';
-    const params = ['Approved', id];
+    const params = [newStatus, id];
     databaseLink.query(userQuery, params)
       .then(result =>
         reqHelper.success(res, 200, 'Request approved', result.rows[0]))
-      .catch(error => reqHelper.error(res, 500, error.toString()));
-  }
-
-  /**
- * API method to mark request as disapproved by user
- * @param {obj} req
- * @param {obj} res
- * @returns {obj} success message
- */
-  static disapproveRequests(req, res) {
-    const id = parseInt(req.params.requestId, 10);
-    const userQuery = 'UPDATE requests SET status = $1, updatedat = NOW() WHERE id = $2 returning *';
-    const params = ['Disapproved', id];
-    databaseLink.query(userQuery, params)
-      .then(result =>
-        reqHelper.success(res, 200, 'Request Disapproved', result.rows[0]))
       .catch(error => reqHelper.error(res, 500, error.toString()));
   }
 }

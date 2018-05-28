@@ -7,8 +7,6 @@ dotenv.config();
 
 const databaseLink = require('../models/databaseLink');
 
-databaseLink.connect();
-
 /**
  * Class for /api/routes
  * @class requestController
