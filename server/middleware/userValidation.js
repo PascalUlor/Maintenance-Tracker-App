@@ -5,9 +5,9 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const dataBaseLink = require('../models/dataBaseLink');
+const databaseLink = require('../models/databaseLink');
 
-dataBaseLink.connect();
+databaseLink.connect();
 
 /**
  * Validates all routes
@@ -37,7 +37,7 @@ export default class userValidation {
         text: 'SELECT * FROM users WHERE email = $1;',
         values: [req.body.email],
       };
-      dataBaseLink.query(userEmail, (error, result) => {
+      databaseLink.query(userEmail, (error, result) => {
         if (result.rows[0]) {
           return res.status(409).json({
             success: false,
