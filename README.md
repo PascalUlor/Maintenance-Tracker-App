@@ -6,7 +6,7 @@
 **Maintenance-Tracker-App** is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs department regarding repair or maintenance requests and monitor the status of their request.
 
 
-#Table Of Content
+# Table Of Content
 1. [Getting Started](#getting-started "Getting Started")
    ..*[prerequisites](#prerequisites "Prerequisites")
    ..*[Installation](#installation "Installation")
