@@ -34,9 +34,12 @@ router.route('/requests')
   .get(adminController.getAllRequests);
 
 router.route('/requests/:requestId/approve')
-  .put(adminController.approveRequests);
+  .put((req, res) => adminController.requestStatus(req, res, 'Approved'));
 
-  router.route('/requests/:requestId/disapprove')
-  .put(adminController.disapproveRequests);
+router.route('/requests/:requestId/disapprove')
+  .put((req, res) => adminController.requestStatus(req, res, 'Disapprove'));
+
+router.route('/requests/:requestId/resolved')
+  .put((req, res) => adminController.requestStatus(req, res, 'Resolved'));
 
 export default router;
