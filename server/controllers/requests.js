@@ -53,6 +53,28 @@ export default class requestController {
   }
 
   /**
+ * API method GET single request of logged in user
+ * @param {obj} req
+ * @param {obj} res
+ * @returns {obj} success message
+ */
+  static getUserSingleRequests(req, res) {
+    const id = parseInt(req.params.requestId, 10);
+    const { userId } = req.decoded;
+    const checkId = 'SELECT * FROM requests WHERE userId = $1 AND id = $2 LIMIT 1;';
+    const value = [userId, id];
+    databaseLink.query(checkId, value)
+      .then((result) => {
+        if (result.rows[0]) {
+          reqHelper.success(res, 200, 'User request successfully retrieved', result.rows);
+        } else {
+          reqHelper.error(res, 400, 'Request with id does not exist');
+        }
+      }).catch(error => reqHelper.error(res, 500, error.toString()));
+  }
+
+
+  /**
  * API method to (PUT) update a Request
  * @param {obj} req
  * @param {obj} res
@@ -67,9 +89,9 @@ export default class requestController {
     databaseLink.query(checkId, value)
       .then((result) => {
         if (!result.rows[0]) {
-          reqHelper.error(res, 400, 'Request with id does not exist');
-        } if (userId !== result.rows[0].userid) {
-          reqHelper.error(res, 400, 'Access Denied. You are not authorized to update this request');
+          return reqHelper.error(res, 400, 'Request with id does not exist');
+        } else if (userId !== result.rows[0].userid) {
+          return reqHelper.error(res, 400, 'Access Denied. You are not authorized to update this request');
         }
         databaseLink.query(userQuery, params)
           .then(update =>
@@ -78,27 +100,27 @@ export default class requestController {
       }).catch(error => reqHelper.error(res, 500, error.toString()));
   } // Method to Update request ends
 
-  /**
-     * API method to GET a single request
-     * @param {obj} req
-     * @param {obj} res
-     * @returns {obj} success message
-     */
-  static getSingleRequest(req, res) {
-    const index = parseInt(req.params.requestId, 10);
-    const findRequest = db.requestDataBase.find(request => request.id === index);
-    if (findRequest) {
-      return res.status(200).json({
-        success: true,
-        message: 'Successfully Retrieved Request',
-        data: db.requestDataBase[index - 1]
-      });
-    }
-    return res.status(400).json({
-      success: false,
-      message: 'Request does not exist'
-    });
-  }// getSinglerequest ends
+  // /**
+  //    * API method to GET a single request
+  //    * @param {obj} req
+  //    * @param {obj} res
+  //    * @returns {obj} success message
+  //    */
+  // static getSingleRequest(req, res) {
+  //   const index = parseInt(req.params.requestId, 10);
+  //   const findRequest = db.requestDataBase.find(request => request.id === index);
+  //   if (findRequest) {
+  //     return res.status(200).json({
+  //       success: true,
+  //       message: 'Successfully Retrieved Request',
+  //       data: db.requestDataBase[index - 1]
+  //     });
+  //   }
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: 'Request does not exist'
+  //   });
+  // }// getSinglerequest ends
 
   /**
  * API method DELETE a rquest from requestDb

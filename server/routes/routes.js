@@ -19,7 +19,7 @@ router.route('/users/requests')
 router.route('/users/requests/:requestId')
   .put(authToken, validation.updateRequestValidation, requestController.updateRequests)
   .delete(requestController.deleteRequest)
-  .get(requestController.getSingleRequest);
+  .get(authToken, requestController.getUserSingleRequests);
 
 router.route('/auth/signup')
   .post(verify.checkUser, userController.userSignup);

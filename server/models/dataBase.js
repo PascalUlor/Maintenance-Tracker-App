@@ -1,4 +1,4 @@
-const dataBase = `
+const database = `
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id SERIAL primary key,
@@ -22,4 +22,4 @@ CREATE TABLE requests (
   );
   `;
 
-export default dataBase;
+export default database;
