@@ -3,9 +3,9 @@ import dotenv from 'dotenv';
 import reqHelper from '../helpers/reqHelper';
 import createToken from '../helpers/createToken';
 
-dotenv.config();
+import { query } from '../models/databaseLink';
 
-const databaseLink = require('../models/databaseLink');
+dotenv.config();
 
 
 /**
@@ -21,14 +21,14 @@ export default class userController {
    */
   static userSignup(req, res) {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
-      const { fullName, email } = req.body,
-        password = hash;
+      const { fullName, email } = req.body;
+      const password = hash;
       const userQuery = 'INSERT INTO users (fullName, role, email, password) VALUES ($1, $2, $3, $4) returning *';
       const params = [fullName, 'user', email, password];
-      databaseLink.query(userQuery, params)
+      query(userQuery, params)
         .then(result => (createToken(
           res, 201,
-          'Signup successfull', result
+          'Signup successfull', result,
         ))).catch(error => reqHelper.error(res, 500, error.message));
     });// bcrypt end
   }// user signup end
@@ -40,11 +40,11 @@ export default class userController {
        * @returns {obj} success message
        */
   static userLogin(req, res) {
-    const { email, password } = req.body,
-      errors = { form: 'Invalid email or password' };
+    const { email, password } = req.body;
+    const errors = { form: 'Invalid email or password' };
     const userQuery = 'SELECT email, password, id FROM users WHERE email = $1 LIMIT 1;';
     const params = [email];
-    databaseLink.query(userQuery, params)
+    query(userQuery, params)
       .then((result) => {
         if (result.rows[0]) {
           const getPassword = bcrypt.compareSync(password, result.rows[0].password);
@@ -53,12 +53,12 @@ export default class userController {
           }
           return res.status(401).json({
             succes: false,
-            errors
+            errors,
           });
         }
         return res.status(401).json({
           success: false,
-          errors
+          errors,
         });
       }).catch(error => reqHelper.error(res, 500, error.message));
   }

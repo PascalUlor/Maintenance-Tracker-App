@@ -17,13 +17,14 @@ export default class requestValidation {
      * @returns {object} get error message
      */
   static createRequestValidation(req, res, next) {
-    if (req.body.title === undefined || req.body.department === undefined || req.body.details === undefined) {
+    if (req.body.title === undefined || req.body.department === undefined ||
+       req.body.details === undefined) {
       return res.status(422).json({ success: false, message: 'Some or all fields are undefined' });
     }
-    const title = req.body.title.trim(),
-      department = req.body.department.trim(),
-      details = req.body.details.trim(),
-      errors = {};
+    const title = req.body.title.trim();
+    const department = req.body.department.trim();
+    const details = req.body.details.trim();
+    const errors = {};
 
     if (!validator.isEmpty(title)) {
       if (title.search(/[^A-Za-z\s]/) !== -1) {
@@ -57,7 +58,8 @@ export default class requestValidation {
 
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json(errors);
-    } next();
+    }
+    return next();
   }
 
   /**
@@ -72,9 +74,9 @@ export default class requestValidation {
      * @returns {object} get error message
      */
   static updateRequestValidation(req, res, next) {
-    const { title, department, details } = req.body,
-      requestID = parseInt(req.params.requestId, 10),
-      errors = {};
+    const { title, department, details } = req.body;
+    const requestID = parseInt(req.params.requestId, 10);
+    const errors = {};
 
     if (!Number.isNaN(requestID)) {
       if (!(title || department || details)) {
@@ -96,7 +98,8 @@ export default class requestValidation {
 
       if (Object.keys(errors).length !== 0) {
         return res.status(400).json(errors);
-      } next();
+      }
     }
+    return next();
   }
 }

@@ -13,7 +13,7 @@ dotenv.config();
  * @param   {object} res  the server/http(s) response object
  * @param   {object} next      the node/express middleware next object
  *
- * @returns {object} failure error message object on denied requestuest or user decoded data object on granted requestuest
+ * @returns {object}
  */
 const authToken = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -23,15 +23,12 @@ const authToken = (req, res, next) => {
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {
         reqHelper.error(res, 401, 'Authentication failed. Token is invalid or expired');
-        // return res.status(401).json({ message: 'Authentication failed. Token is invalid or expired' });
       }
-      // if authentication is valid, save to request for use in other routes
       req.decoded = decoded;
       next();
     });
   } else {
     reqHelper.error(res, 403, 'Access denied. You are not logged in');
-    // return res.status(403).json({ message: 'Access denied. You are not logged in' });
   }
 };
 

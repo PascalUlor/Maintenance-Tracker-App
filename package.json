@@ -54,6 +54,7 @@
     "pg": "^7.4.3",
     "supertest": "^3.1.0",
     "swagger-ui-express": "^3.0.9",
-    "validator": "^10.2.0"
+    "validator": "^10.2.0",
+    "winston": "^2.4.2"
   }
 }

@@ -5,9 +5,9 @@ import supertest from 'supertest';
 import chai from 'chai';
 import app from '../../app';
 
-const { expect } = chai,
-  request = supertest(app),
-  invalidID = 50;
+const { expect } = chai;
+const request = supertest(app);
+const invalidID = 50;
 
 describe('Test cases for Retrieving a users request', () => {
   it('Should return 200 for getting request', (done) => {
