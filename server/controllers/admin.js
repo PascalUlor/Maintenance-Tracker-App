@@ -76,4 +76,20 @@ export default class adminController {
         reqHelper.success(res, 200, 'Request approved', result.rows[0]))
       .catch(error => reqHelper.error(res, 500, error.toString()));
   }
+
+  /**
+ * API method to mark request as disapproved by user
+ * @param {obj} req
+ * @param {obj} res
+ * @returns {obj} success message
+ */
+  static disapproveRequests(req, res) {
+    const id = parseInt(req.params.requestId, 10);
+    const userQuery = 'UPDATE requests SET status = $1, updatedat = NOW() WHERE id = $2 returning *';
+    const params = ['Disapproved', id];
+    databaseLink.query(userQuery, params)
+      .then(result =>
+        reqHelper.success(res, 200, 'Request Disapproved', result.rows[0]))
+      .catch(error => reqHelper.error(res, 500, error.toString()));
+  }
 }

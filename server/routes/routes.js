@@ -36,4 +36,7 @@ router.route('/requests')
 router.route('/requests/:requestId/approve')
   .put(adminController.approveRequests);
 
+  router.route('/requests/:requestId/disapprove')
+  .put(adminController.disapproveRequests);
+
 export default router;
