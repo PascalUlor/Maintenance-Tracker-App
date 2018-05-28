@@ -1,3 +1,4 @@
+import reqHelper from '../helpers/reqHelper';
 import db from '../models/testData';
 
 const dotenv = require('dotenv');
@@ -58,5 +59,21 @@ export default class adminController {
         data: result.rows
       });
     });
+  }
+
+  /**
+ * API method to mark request as approved by user
+ * @param {obj} req
+ * @param {obj} res
+ * @returns {obj} success message
+ */
+  static approveRequests(req, res) {
+    const id = parseInt(req.params.requestId, 10);
+    const userQuery = 'UPDATE requests SET status = $1, updatedat = NOW() WHERE id = $2 returning *';
+    const params = ['Approved', id];
+    databaseLink.query(userQuery, params)
+      .then(result =>
+        reqHelper.success(res, 200, 'Request approved', result.rows[0]))
+      .catch(error => reqHelper.error(res, 500, error.toString()));
   }
 }

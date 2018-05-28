@@ -33,4 +33,7 @@ router.route('/requests/:id')
 router.route('/requests')
   .get(adminController.getAllRequests);
 
+router.route('/requests/:requestId/approve')
+  .put(adminController.approveRequests);
+
 export default router;
