@@ -4,7 +4,7 @@ import reqHelper from './reqHelper';
 
 dotenv.config();
 
-const createToken = (req, res, statusCode, message, result) => {
+const createToken = (res, statusCode, message, result) => {
   const payload = {
     fullName: result.rows[0].fullname,
     userId: result.rows[0].id,

@@ -48,20 +48,6 @@ describe('All test cases for Maintenance-Tracker application', () => {
     });
   });// Homepage tests ends
 
-  describe('test cases to Get All user request from DATABASE', () => {
-    it('should return `200` status code with `res.body` success message', (done) => {
-      request.get('/api/v1/users/requests')
-        .set('Content-Type', 'application/json')
-        .send({})
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body.success).to.equal(true);
-          expect(res.body.message).to.equal('Successfully Retrieved all requests');
-          done();
-        });
-    });
-  });
-
 
   // test case to create request in database
   describe('All test cases for creatinging a new request', () => {
@@ -245,31 +231,70 @@ describe('All test cases for Maintenance-Tracker application', () => {
     });
   });// Update Test end
 
-  describe('Test case for retrieving a Single request', () => {
-    it('should return `400` status code with for invalid id', (done) => {
-      request.get(`/api/v1/users/requests/${invalidID}`)
-        .set('Content-Type', 'application/json')
-        .send({})
-        .expect(400)
-        .end((err, res) => {
-          expect(res.body.success).to.equal(false);
-          expect(res.body.message).to.equal('Request does not exist');
-          done();
-        });
-    });
-
-    it('should return `200` status code with `res body` success message', (done) => {
-      request.get('/api/v1/users/requests/2')
-        .set('Content-Type', 'application/json')
+  describe('test cases to Get request for logged in user', () => {
+    it('should return `200` status code with `res.body` success message', (done) => {
+      request.get('/api/v1/users/requests')
+        .set('x-access-token', userToken.token)
         .send({})
         .expect(200)
         .end((err, res) => {
           expect(res.body.success).to.equal(true);
-          expect(res.body.message).to.equal('Successfully Retrieved Request');
+          expect(res.body.message).to.equal('Requests with userId successfully retrieved');
+          done();
+        });
+    });
+
+    it('Should return error single request qery with invalid id', (done) => {
+      request.get(`/api/v1/users/requests/${invalidID}`)
+        .set('x-access-token', userToken.token)
+        .send({})
+        .expect(400)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.errors).to.equal('Request with id does not exist');
+          done();
+        });
+    });
+
+    it('Should return success message when valid id and token are entered', (done) => {
+      request.get('/api/v1/users/requests/1')
+        .set('x-access-token', userToken.token)
+        .send({})
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.message).to.equal('User request successfully retrieved');
+          expect(res.status).to.equal(200);
           done();
         });
     });
   });
+
+
+  // describe('Test case for retrieving a Single request', () => {
+  //   it('should return `400` status code with for invalid id', (done) => {
+  //     request.get(`/api/v1/users/requests/${invalidID}`)
+  //       .set('Content-Type', 'application/json')
+  //       .send({})
+  //       .expect(400)
+  //       .end((err, res) => {
+  //         expect(res.body.success).to.equal(false);
+  //         expect(res.body.message).to.equal('Request does not exist');
+  //         done();
+  //       });
+  //   });
+
+  //   it('should return `200` status code with `res body` success message', (done) => {
+  //     request.get('/api/v1/users/requests/2')
+  //       .set('Content-Type', 'application/json')
+  //       .send({})
+  //       .expect(200)
+  //       .end((err, res) => {
+  //         expect(res.body.success).to.equal(true);
+  //         expect(res.body.message).to.equal('Successfully Retrieved Request');
+  //         done();
+  //       });
+  //   });
+  // });
 
   describe('Test cases for deleting request', () => {
     it('should return an error message (400) for invalid Id', (done) => {

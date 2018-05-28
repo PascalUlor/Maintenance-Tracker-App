@@ -11,21 +11,29 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+// User
 router.route('/users/requests')
   .post(authToken, validation.createRequestValidation, requestController.createRequest)
-  .get(requestController.getAllRequests);
+  .get(authToken, requestController.getAllRequestsUser);
 
 router.route('/users/requests/:requestId')
   .put(authToken, validation.updateRequestValidation, requestController.updateRequests)
   .delete(requestController.deleteRequest)
-  .get(requestController.getSingleRequest);
+  .get(authToken, requestController.getUserSingleRequests);
 
 router.route('/auth/signup')
   .post(verify.checkUser, userController.userSignup);
 router.route('/auth/login')
   .post(userController.userLogin);
 
-router.route('/admin/users/requests/:id')
+// Admin
+router.route('/requests/:id')
   .get(adminController.getUserRequest);
+
+router.route('/requests')
+  .get(adminController.getAllRequests);
+
+router.route('/requests/:requestId/approve')
+  .put(adminController.approveRequests);
 
 export default router;
