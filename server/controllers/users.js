@@ -21,10 +21,10 @@ export default class userController {
    */
   static userSignup(req, res) {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
-      const { fullName, email } = req.body;
+      const { firstName, lastName, email } = req.body;
       const password = hash;
-      const userQuery = 'INSERT INTO users (fullName, role, email, password) VALUES ($1, $2, $3, $4) returning *';
-      const params = [fullName, 'user', email, password];
+      const userQuery = 'INSERT INTO users (firstName, lastName, role, email, password) VALUES ($1, $2, $3, $4, $5) returning *';
+      const params = [firstName, lastName, 'user', email, password];
       databaseLink.query(userQuery, params)
         .then(result => (createToken(
           res, 201,

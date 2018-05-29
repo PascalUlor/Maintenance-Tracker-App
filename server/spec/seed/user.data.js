@@ -1,31 +1,37 @@
 export default {
   validInput1: {
-    fullName: 'Bruce Banner',
+    firstName: 'Bruce',
+    lastName: 'Banner',
     email: 'banner@yahoo.com',
     password: 'bruce banner',
   },
   validInput2: {
-    fullName: 'Mike',
+    firstName: 'Mike',
+    lastName: 'Owen',
     email: 'mk@yahoo.com',
     password: 'ulor mike',
   },
 
   existingEmail: {
-    fullName: 'BruceBanner',
+    firstName: 'Barry',
+    lastName: 'Allen',
     email: 'banner@yahoo.com',
-    password: 'bruce banner',
+    password: 'theFlash',
   },
   incompleteData: {
-    fullName: 'Anna Jones',
+    firstName: 'Anna',
+    lastName: 'Jones',
     email: 'annie@yahoo.com',
   },
   emptyData: {
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
   },
   improperData: {
-    fullName: '23BruceBanner',
+    firstName: '23BruceBanner',
+    lastName: '1Jones',
     email: 'banner@yahoo.com',
     password: 'bruce banner',
   },

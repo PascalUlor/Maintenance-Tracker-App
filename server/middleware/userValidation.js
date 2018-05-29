@@ -26,7 +26,9 @@ export default class userValidation {
           error: err,
         });
       }
-      const { fullName, email, password = hash } = req.body;
+      const {
+        firstName, lastName, email, password = hash,
+      } = req.body;
       const errors = {};
 
       const userEmail = {
@@ -41,15 +43,20 @@ export default class userValidation {
           });
         }
 
-        if (fullName === undefined || password === undefined || email === undefined) {
+        if (firstName === undefined || lastName === undefined || password === undefined
+          || email === undefined) {
           res.status(400);
           res.json({
             success: false,
             message: 'Some or all fields are undefined',
           });
         } else {
-          if (validator.isEmpty(fullName)) {
-            errors.fullName = 'fullName is required';
+          if (validator.isEmpty(firstName)) {
+            errors.firstName = 'first name is required';
+          }
+
+          if (validator.isEmpty(lastName)) {
+            errors.lastName = 'last name is required';
           }
 
           if (!(validator.isEmail(email))) {

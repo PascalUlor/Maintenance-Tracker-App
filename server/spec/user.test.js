@@ -23,9 +23,10 @@ describe('All Test cases for user Signup', () => {
         expect(res.body).to.haveOwnProperty('token');
         expect(res.body.message).to.equal('Signup successfull');
         expect(res.body.user).to.eql({
-          id: 2,
-          fullName: 'Bruce Banner',
+          userId: 2,
+          fullName: 'BruceBanner',
           email: 'banner@yahoo.com',
+          role: 'user',
         });
         if (err) done(err);
         done();
@@ -41,9 +42,10 @@ describe('All Test cases for user Signup', () => {
         expect(res.body).to.haveOwnProperty('token');
         expect(res.body.message).to.equal('Signup successfull');
         expect(res.body.user).to.eql({
-          id: 3,
-          fullName: 'Mike',
+          userId: 3,
+          fullName: 'MikeOwen',
           email: 'mk@yahoo.com',
+          role: 'user',
         });
         if (err) done(err);
         done();
@@ -58,7 +60,8 @@ describe('All Test cases for user Signup', () => {
       })
       .expect(400)
       .end((err, res) => {
-        expect(res.body.fullName).to.equal(undefined);
+        expect(res.body.firstName).to.equal(undefined);
+        expect(res.body.lastName).to.equal(undefined);
         expect(res.body.email).to.equal(undefined);
         expect(res.body).deep.equal({
           success: false,
@@ -94,14 +97,11 @@ describe('All Test cases for user Signup', () => {
   it('should return `400` status code with errors message for empty request', (done) => {
     request.post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
-      .send({
-        fullName: '',
-        email: '',
-        password: '',
-      })
+      .send(inputs.emptyData)
       .expect(400)
       .end((err, res) => {
-        expect(res.body.fullName).to.eql('fullName is required');
+        expect(res.body.firstName).to.eql('first name is required');
+        expect(res.body.lastName).to.eql('last name is required');
         expect(res.body.email).to.eql('email is required');
         expect(res.body.password).to.eql('password is required');
         expect(res.status).to.equal(400);
