@@ -25,7 +25,7 @@ describe('All Test cases for user Signup', () => {
         expect(res.body.user).to.eql({
           id: 2,
           fullName: 'Bruce Banner',
-          email: 'banner@yahoo.com'
+          email: 'banner@yahoo.com',
         });
         if (err) done(err);
         done();
@@ -43,7 +43,7 @@ describe('All Test cases for user Signup', () => {
         expect(res.body.user).to.eql({
           id: 3,
           fullName: 'Mike',
-          email: 'mk@yahoo.com'
+          email: 'mk@yahoo.com',
         });
         if (err) done(err);
         done();
@@ -54,7 +54,7 @@ describe('All Test cases for user Signup', () => {
     request.post('/api/v1/auth/signup')
       .set('Content-Type', 'application/json')
       .send({
-        password: '123'
+        password: '123',
       })
       .expect(400)
       .end((err, res) => {
@@ -62,7 +62,7 @@ describe('All Test cases for user Signup', () => {
         expect(res.body.email).to.equal(undefined);
         expect(res.body).deep.equal({
           success: false,
-          message: 'Some or all fields are undefined'
+          message: 'Some or all fields are undefined',
         });
         if (err) done(err);
         done();
@@ -97,8 +97,8 @@ describe('All Test cases for user Signup', () => {
       .send({
         fullName: '',
         email: '',
-        password: ''
-      }) // empty body request
+        password: '',
+      })
       .expect(400)
       .end((err, res) => {
         expect(res.body.fullName).to.eql('fullName is required');
@@ -143,7 +143,6 @@ describe('All Test cases for user login', () => {
       .set('Content-Type', 'application/json')
       .send(inputs.userOneLogin)
       .end((err, res) => {
-        console.log(res.body.token);
         userToken.token = res.body.token;
         expect(res.body).to.haveOwnProperty('token');
         expect(res.status).to.equal(200);

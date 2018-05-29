@@ -4,7 +4,6 @@
 import supertest from 'supertest';
 import chai from 'chai';
 import app from '../../app';
-import db from '../models/testData';
 
 import data from './seed/user.data';
 import inputs from './seed/requests.data';
@@ -12,9 +11,9 @@ import userToken, { wrongToken } from './user.test';
 
 const user2Token = { token: null };
 
-const { expect } = chai,
-  request = supertest(app),
-  invalidID = 50;
+const { expect } = chai;
+const request = supertest(app);
+const invalidID = 50;
 
 describe('All test cases for Maintenance-Tracker application', () => {
   describe('Test case for loading application home page', () => {
@@ -25,7 +24,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .end((err, res) => {
           expect(res.body).deep.equal({
             name: 'Welcome to Maintenance Tracker',
-            message: 'Your Service, Our Pleasure'
+            message: 'Your Service, Our Pleasure',
           });
           if (err) done(err);
           done();
@@ -40,7 +39,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .expect(404)
         .end((err, res) => {
           expect(res.body).deep.equal({
-            message: 'Invalid routes'
+            message: 'Invalid routes',
           });
           if (err) done(err);
           done();
@@ -70,7 +69,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .end((err, res) => {
           expect(res.body).deep.equal({
             success: false,
-            message: 'Some or all fields are undefined'
+            message: 'Some or all fields are undefined',
           });
           done();
         });
@@ -161,7 +160,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .end((err, res) => {
           expect(res.body).deep.equal({
             errors: 'Request with id does not exist',
-            success: false
+            success: false,
           });
           done();
         });
@@ -175,7 +174,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .end((err, res) => {
           expect(res.body).deep.equal({
             success: false,
-            message: 'Enter a valid update'
+            message: 'Enter a valid update',
           });
           expect(res.status).to.equal(422);
           done();
@@ -200,7 +199,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .end((err, res) => {
           expect(res.body).to.eql({
             success: false,
-            errors: 'Authentication failed. Token is invalid or expired'
+            errors: 'Authentication failed. Token is invalid or expired',
           });
           done();
         });
@@ -269,32 +268,6 @@ describe('All test cases for Maintenance-Tracker application', () => {
     });
   });
 
-
-  // describe('Test case for retrieving a Single request', () => {
-  //   it('should return `400` status code with for invalid id', (done) => {
-  //     request.get(`/api/v1/users/requests/${invalidID}`)
-  //       .set('Content-Type', 'application/json')
-  //       .send({})
-  //       .expect(400)
-  //       .end((err, res) => {
-  //         expect(res.body.success).to.equal(false);
-  //         expect(res.body.message).to.equal('Request does not exist');
-  //         done();
-  //       });
-  //   });
-
-  //   it('should return `200` status code with `res body` success message', (done) => {
-  //     request.get('/api/v1/users/requests/2')
-  //       .set('Content-Type', 'application/json')
-  //       .send({})
-  //       .expect(200)
-  //       .end((err, res) => {
-  //         expect(res.body.success).to.equal(true);
-  //         expect(res.body.message).to.equal('Successfully Retrieved Request');
-  //         done();
-  //       });
-  //   });
-  // });
 
   describe('Test cases for deleting request', () => {
     it('should return an error message (400) for invalid Id', (done) => {

@@ -1,11 +1,11 @@
 import reqHelper from '../helpers/reqHelper';
 import db from '../models/testData';
+import databaseLink from '../models/databaseLink';
 
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-const databaseLink = require('../models/databaseLink');
 
 /**
  * Class for /api/routes
@@ -19,15 +19,16 @@ export default class requestController {
      * @returns {obj} insertion error messages or success messages
      */
   static createRequest(req, res) {
-    const { title, department, details } = req.body, { userId } = req.decoded;
+    const { title, department, details } = req.body;
+    const { userId } = req.decoded;
     const userQuery = 'INSERT INTO requests (title, department, details, userId, status) VALUES($1, $2, $3, $4, $5) RETURNING *';
     const params = [title, department, details, userId, 'pending'];
     databaseLink.query(userQuery, params)
       .then(result => reqHelper.success(
         res, 201,
-        'Request created successfully', result.rows[0]
+        'Request created successfully', result.rows[0],
       )).catch(error => reqHelper.error(res, 500, error.message));
-  }// Method to create request ends
+  }
 
 
   /**
@@ -79,7 +80,9 @@ export default class requestController {
  * @returns {obj} with success or error message
  */
   static updateRequests(req, res) {
-    const { title, department, details } = req.body, { userId } = req.decoded, id = parseInt(req.params.requestId, 10);
+    const { title, department, details } = req.body;
+    const { userId } = req.decoded;
+    const id = parseInt(req.params.requestId, 10);
     const checkId = 'SELECT * FROM requests WHERE id = $1 LIMIT 1;';
     const value = [id];
     const userQuery = 'UPDATE requests SET title = $1, department = $2, details = $3 WHERE id = $4 RETURNING *';
@@ -91,34 +94,12 @@ export default class requestController {
         } else if (userId !== result.rows[0].userid) {
           return reqHelper.error(res, 400, 'Access Denied. You are not authorized to update this request');
         }
-        databaseLink.query(userQuery, params)
+        return databaseLink.query(userQuery, params)
           .then(update =>
             reqHelper.success(res, 200, 'Request with id successfully updated', update.rows[0]))
           .catch(error => reqHelper.error(res, 500, error.toString()));
       }).catch(error => reqHelper.error(res, 500, error.toString()));
-  } // Method to Update request ends
-
-  // /**
-  //    * API method to GET a single request
-  //    * @param {obj} req
-  //    * @param {obj} res
-  //    * @returns {obj} success message
-  //    */
-  // static getSingleRequest(req, res) {
-  //   const index = parseInt(req.params.requestId, 10);
-  //   const findRequest = db.requestDataBase.find(request => request.id === index);
-  //   if (findRequest) {
-  //     return res.status(200).json({
-  //       success: true,
-  //       message: 'Successfully Retrieved Request',
-  //       data: db.requestDataBase[index - 1]
-  //     });
-  //   }
-  //   return res.status(400).json({
-  //     success: false,
-  //     message: 'Request does not exist'
-  //   });
-  // }// getSinglerequest ends
+  }
 
   /**
  * API method DELETE a rquest from requestDb
@@ -136,14 +117,14 @@ export default class requestController {
       res.json({
         success: true,
         message: 'Request successfully deleted',
-        data: db.requestDataBase
+        data: db.requestDataBase,
       });
     } else {
       res.status(400);
       res.json({
         success: false,
-        message: 'Request with id does not exist'
+        message: 'Request with id does not exist',
       });
     }
-  }// Method to delete business ends
+  }
 }

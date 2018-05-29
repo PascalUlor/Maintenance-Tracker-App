@@ -8,18 +8,18 @@ const createToken = (res, statusCode, message, result) => {
   const payload = {
     fullName: result.rows[0].fullname,
     userId: result.rows[0].id,
-    role: result.rows[0].role
+    role: result.rows[0].role,
   };
   const token = jwt.sign(payload, process.env.SECRET_KEY, {
-    expiresIn: 60 * 60 * 1440
+    expiresIn: 60 * 60 * 1440,
   });
   const logInfo = {
     user: {
       id: result.rows[0].id,
       fullName: result.rows[0].fullname,
-      email: result.rows[0].email
+      email: result.rows[0].email,
     },
-    token
+    token,
   };
   reqHelper.success(res, statusCode, message, logInfo);
 };

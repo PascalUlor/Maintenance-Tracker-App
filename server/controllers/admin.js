@@ -1,11 +1,10 @@
 import reqHelper from '../helpers/reqHelper';
 import db from '../models/testData';
+import databaseLink from '../models/databaseLink';
 
 const dotenv = require('dotenv');
 
 dotenv.config();
-
-const databaseLink = require('../models/databaseLink');
 
 
 /**
@@ -23,19 +22,16 @@ export default class adminController {
     const uId = parseInt(req.params.id, 10);
     if (uId in db.requestDataBase.map(request => request.userId)) {
       const userRequest = db.requestDataBase.filter(request => request.userId === uId);
-      console.log(uId);
-      res.status(200);
-      res.json({
+      return res.status(200).json({
         success: true,
         message: 'Successfully retrieved request for user',
-        userRequest
-      });
-    } else {
-      return res.status(404).json({
-        success: false,
-        message: 'Failed to retrieved request for user'
+        userRequest,
       });
     }
+    return res.status(404).json({
+      success: false,
+      message: 'Failed to retrieved request for user',
+    });
   }// getUserRequest end
 
   /**
@@ -49,13 +45,13 @@ export default class adminController {
       if (error) {
         return res.status(404).json({
           success: false,
-          message: 'No request available'
+          message: 'No request available',
         });
       }
       return res.status(200).json({
         success: true,
         message: 'Successfully Retrieved all requests',
-        data: result.rows
+        data: result.rows,
       });
     });
   }

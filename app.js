@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import logger from 'morgan';
+import morgan from 'morgan';
+import winston from './server/config/winston';
 
 
 import routes from './server/routes/routes';
@@ -13,14 +14,29 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(logger('dev'));
+app.use(morgan('combined', { stream: winston.stream }));
+
+// error handler
+app.use((err, req, res, next) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // add this line to include winston logging
+  winston.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+  next();
+});
 
 // Home page route
 app.get('/', (req, res) => {
   res.status(200);
   res.json({
     name: 'Welcome to Maintenance Tracker',
-    message: 'Your Service, Our Pleasure'
+    message: 'Your Service, Our Pleasure',
   });
 });
 
@@ -31,10 +47,10 @@ app.use('/api/v1/', routes);
 // Trivial Route
 app.get('*', (req, res) => {
   res.status(404).json({
-    message: 'Invalid routes'
+    message: 'Invalid routes',
   });
 });
 
 
-app.listen(port, () => console.log(`Application started on port ${port}, ${process.cwd()}, ${__dirname}`));
+app.listen(port, () => winston.info(`Application started on port ${port}, ${process.cwd()}, ${__dirname}`));
 export default app;

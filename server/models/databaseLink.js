@@ -1,3 +1,4 @@
+import winston from '../config/winston';
 import database from './database';
 
 const { Client } = require('pg');
@@ -8,9 +9,9 @@ const seed = () => {
   const qry = database;
   client.query(qry, (err, result) => {
     if (err) {
-      console.log(err.toString());
+      winston.info(err.toString());
     } else {
-      console.log(result);
+      winston.info(result);
     }
   });
 };
@@ -18,8 +19,7 @@ const seed = () => {
 const connect = () => {
   client.connect()
     .then((err) => {
-      console.log('connection established');
-      // query goes here
+      winston.info('database connection established');
       if (!err) {
         seed();
       }
@@ -28,6 +28,7 @@ const connect = () => {
 
 connect();
 
-module.exports = {
-  query: (text, params, callback) => client.query(text, params, callback)
+const databaseLink = {
+  query: (text, params, callback) => client.query(text, params, callback),
 };
+export default databaseLink;

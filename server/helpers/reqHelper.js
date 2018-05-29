@@ -1,22 +1,19 @@
 const requestHelper = {
   success(res, statusCode, message, data) {
     if (data) {
-      return res.status(statusCode).json(Object.assign({
-        success: true,
-        message
-      }, data));
+      return res.status(statusCode).json({ success: true, message, ...data });
     }
     return res.status(statusCode).json({
       success: true,
-      message
+      message,
     });
   },
   error(res, statusCode, errors) {
     return res.status(statusCode).json({
       success: false,
-      errors
+      errors,
     });
-  }
+  },
 };
 
 export default requestHelper;
