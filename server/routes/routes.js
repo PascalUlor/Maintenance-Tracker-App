@@ -11,7 +11,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// User
 router.route('/users/requests')
   .post(authToken, validation.createRequestValidation, requestController.createRequest)
   .get(authToken, requestController.getAllRequestsUser);
@@ -26,7 +25,6 @@ router.route('/auth/signup')
 router.route('/auth/login')
   .post(userController.userLogin);
 
-// Admin
 router.route('/requests/:id')
   .get(adminController.getUserRequest);
 

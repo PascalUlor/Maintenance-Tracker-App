@@ -1,10 +1,7 @@
 const requestHelper = {
   success(res, statusCode, message, data) {
     if (data) {
-      return res.status(statusCode).json(Object.assign({
-        success: true,
-        message,
-      }, data));
+      return res.status(statusCode).json({ success: true, message, ...data });
     }
     return res.status(statusCode).json({
       success: true,

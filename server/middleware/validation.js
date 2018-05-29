@@ -17,14 +17,12 @@ export default class requestValidation {
      * @returns {object} get error message
      */
   static createRequestValidation(req, res, next) {
-    if (req.body.title === undefined || req.body.department === undefined ||
-       req.body.details === undefined) {
+    const { title, department, details } = req.body;
+    const errors = {};
+    if (title === undefined || department === undefined ||
+       details === undefined) {
       return res.status(422).json({ success: false, message: 'Some or all fields are undefined' });
     }
-    const title = req.body.title.trim();
-    const department = req.body.department.trim();
-    const details = req.body.details.trim();
-    const errors = {};
 
     if (!validator.isEmpty(title)) {
       if (title.search(/[^A-Za-z\s]/) !== -1) {
@@ -32,7 +30,6 @@ export default class requestValidation {
       }
     } else { errors.title = 'title is required'; }
 
-    // validate title
     if (!(validator.isEmpty(title))) {
       if (!(validator.isLength(title, { min: 3, max: 50 }))) {
         errors.title = 'title must be between 3 to 50 characters';
@@ -41,7 +38,6 @@ export default class requestValidation {
       errors.title = 'title is required';
     }
 
-    // validate request details
     if (!(validator.isEmpty(details))) {
       if (!(validator.isLength(details, { min: 20, max: 1000 }))) {
         errors.details = 'Details field must be between 20 to 1000 characters';
@@ -50,7 +46,6 @@ export default class requestValidation {
       errors.details = 'Details field is required';
     }
 
-    // validate department
     if (validator.isEmpty(department)) {
       errors.department = 'department is required';
     }
@@ -89,7 +84,6 @@ export default class requestValidation {
           errors.title = 'title must be between 3 to 50 characters';
         }
       }
-      // validate details
       if (details) {
         if (!(validator.isLength(details, { min: 20, max: 1000 }))) {
           errors.details = 'Details field must be between 20 to 1000 characters';

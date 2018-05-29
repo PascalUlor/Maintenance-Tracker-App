@@ -1,11 +1,10 @@
 import validator from 'validator';
 import bcrypt from 'bcrypt';
+import databaseLink from '../models/databaseLink';
 
 const dotenv = require('dotenv');
 
 dotenv.config();
-
-const databaseLink = require('../models/databaseLink');
 
 
 /**
