@@ -11,3 +11,5 @@ server/dist/
 config/
 
 .vscode
+
+logs/
