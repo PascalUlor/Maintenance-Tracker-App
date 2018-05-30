@@ -67,10 +67,10 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .send({}) // request body not defined
         .expect(422)
         .end((err, res) => {
-          expect(res.body).deep.equal({
-            success: false,
-            message: 'Some or all fields are undefined',
-          });
+          expect(res.body.title).to.eql('title field is undefined');
+          expect(res.body.details).to.eql('details field is undefined');
+          expect(res.body.department).to.eql('department field is undefined');
+          expect(res.status).to.equal(400);
           done();
         });
     });
@@ -78,12 +78,12 @@ describe('All test cases for Maintenance-Tracker application', () => {
     it('should return status code `400` with errors message for empty request', (done) => {
       request.post('/api/v1/users/requests')
         .set('x-access-token', userToken.token)
-        .send(inputs.emptyData) // empty body request
+        .send() // empty body request
         .expect(400)
         .end((err, res) => {
-          expect(res.body.title).to.eql('title is required');
-          expect(res.body.details).to.eql('Details field is required');
-          expect(res.body.department).to.eql('department is required');
+          expect(res.body.title).to.eql('title field is undefined');
+          expect(res.body.details).to.eql('details field is undefined');
+          expect(res.body.department).to.eql('department field is undefined');
           expect(res.status).to.equal(400);
           done();
         });
@@ -96,7 +96,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .expect(400)
         .end((err, res) => {
           expect(res.body).to.have.property('title').eql('title must be between 3 to 50 characters');
-          expect(res.body).to.have.property('details').eql('Details field must be between 20 to 1000 characters');
+          expect(res.body).to.have.property('details').eql('details field must be between 20 to 1000 characters');
           expect(res.status).to.equal(400);
           done();
         });
@@ -172,11 +172,10 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .send(inputs.emptyData)
         .expect(422)
         .end((err, res) => {
-          expect(res.body).deep.equal({
-            success: false,
-            message: 'Enter a valid update',
-          });
-          expect(res.status).to.equal(422);
+          expect(res.body.title).to.eql('title field is undefined');
+          expect(res.body.details).to.eql('details field is undefined');
+          expect(res.body.department).to.eql('department field is undefined');
+          expect(res.status).to.equal(400);
           done();
         });
     });

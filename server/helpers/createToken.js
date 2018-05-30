@@ -5,20 +5,17 @@ import reqHelper from './reqHelper';
 dotenv.config();
 
 const createToken = (res, statusCode, message, result) => {
-  const payload = {
-    fullName: result.rows[0].fullname,
+  const user = {
     userId: result.rows[0].id,
+    fullName: result.rows[0].firstname + result.rows[0].lastname,
+    email: result.rows[0].email,
     role: result.rows[0].role,
   };
-  const token = jwt.sign(payload, process.env.SECRET_KEY, {
+  const token = jwt.sign(user, process.env.SECRET_KEY, {
     expiresIn: 60 * 60 * 1440,
   });
   const logInfo = {
-    user: {
-      id: result.rows[0].id,
-      fullName: result.rows[0].fullname,
-      email: result.rows[0].email,
-    },
+    user,
     token,
   };
   reqHelper.success(res, statusCode, message, logInfo);

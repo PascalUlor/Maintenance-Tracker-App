@@ -21,10 +21,10 @@ export default class userController {
    */
   static userSignup(req, res) {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
-      const { fullName, email } = req.body;
+      const { firstName, lastName, email } = req.body;
       const password = hash;
-      const userQuery = 'INSERT INTO users (fullName, role, email, password) VALUES ($1, $2, $3, $4) returning *';
-      const params = [fullName, 'user', email, password];
+      const userQuery = 'INSERT INTO users (firstName, lastName, role, email, password) VALUES ($1, $2, $3, $4, $5) returning *';
+      const params = [firstName, lastName, 'user', email, password];
       databaseLink.query(userQuery, params)
         .then(result => (createToken(
           res, 201,
@@ -42,7 +42,7 @@ export default class userController {
   static userLogin(req, res) {
     const { email, password } = req.body;
     const errors = { form: 'Invalid email or password' };
-    const userQuery = 'SELECT email, password, id FROM users WHERE email = $1 LIMIT 1;';
+    const userQuery = 'SELECT * FROM users WHERE email = $1 LIMIT 1;';
     const params = [email];
     databaseLink.query(userQuery, params)
       .then((result) => {

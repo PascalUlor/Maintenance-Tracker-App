@@ -29,15 +29,15 @@ router.route('/requests/:id')
   .get(adminController.getUserRequest);
 
 router.route('/requests')
-  .get(adminController.getAllRequests);
+  .get(authToken, adminController.getAllRequests);
 
 router.route('/requests/:requestId/approve')
-  .put((req, res) => adminController.requestStatus(req, res, 'Approved'));
+  .put(authToken, (req, res) => adminController.requestStatus(req, res, 'Approved'));
 
 router.route('/requests/:requestId/disapprove')
-  .put((req, res) => adminController.requestStatus(req, res, 'Disapprove'));
+  .put(authToken, (req, res) => adminController.requestStatus(req, res, 'Disapproved'));
 
 router.route('/requests/:requestId/resolved')
-  .put((req, res) => adminController.requestStatus(req, res, 'Resolved'));
+  .put(authToken, (req, res) => adminController.requestStatus(req, res, 'Resolved'));
 
 export default router;

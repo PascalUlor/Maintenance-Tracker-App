@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node app.js",
     "start:dev": "nodemon --watch server --exec babel-node -- app.js",
-    "test": "set NODE_ENV=test&&nyc --reporter=lcov --reporter=text mocha --timeout 5000 --exit --compilers js:babel-core/register server/specs/*test.js || true",
+    "test": "set NODE_ENV=test&&nyc --reporter=lcov --reporter=text mocha --timeout 5000 --exit --compilers js:babel-core/register server/spec/*test.js || true",
     "build": "babel server -d server/dist --copy-files --ignore server/dist",
     "postinstall": "npm run build",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -43,6 +43,7 @@
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "chokidar": "^2.0.3",
+    "cors": "^2.8.4",
     "coveralls": "^3.0.1",
     "dotenv": "^5.0.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -56,6 +57,7 @@
     "supertest": "^3.1.0",
     "swagger-ui-express": "^3.0.9",
     "validator": "^10.2.0",
-    "winston": "^2.4.2"
+    "winston": "^2.4.2",
+    "yamljs": "^0.3.0"
   }
 }
