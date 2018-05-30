@@ -1,4 +1,4 @@
-import validator from 'validator';
+import checkItem from '../helpers/checkInput';
 
 /**
  * Validate Request POST and GET req
@@ -18,43 +18,12 @@ export default class requestValidation {
      */
   static createRequestValidation(req, res, next) {
     const { title, department, details } = req.body;
-    const errors = {};
-    if (title === undefined || department === undefined ||
-       details === undefined) {
-      return res.status(422).json({ success: false, message: 'Some or all fields are undefined' });
-    }
 
-    if (!validator.isEmpty(title)) {
-      if (title.search(/[^A-Za-z\s]/) !== -1) {
-        errors.title = 'title must be alphabetical';
-      }
-    } else { errors.title = 'title is required'; }
+    const check = checkItem({ title, department, details });
 
-    if (!(validator.isEmpty(title))) {
-      if (!(validator.isLength(title, { min: 3, max: 50 }))) {
-        errors.title = 'title must be between 3 to 50 characters';
-      }
-    } else {
-      errors.title = 'title is required';
-    }
-
-    if (!(validator.isEmpty(details))) {
-      if (!(validator.isLength(details, { min: 20, max: 1000 }))) {
-        errors.details = 'Details field must be between 20 to 1000 characters';
-      }
-    } else {
-      errors.details = 'Details field is required';
-    }
-
-    if (validator.isEmpty(department)) {
-      errors.department = 'department is required';
-    }
-
-
-    if (Object.keys(errors).length !== 0) {
-      return res.status(400).json(errors);
-    }
-    return next();
+    if (Object.keys(check).length > 0) {
+      return res.status(400).json(check);
+    } return next();
   }
 
   /**
@@ -71,27 +40,12 @@ export default class requestValidation {
   static updateRequestValidation(req, res, next) {
     const { title, department, details } = req.body;
     const requestID = parseInt(req.params.requestId, 10);
-    const errors = {};
 
     if (!Number.isNaN(requestID)) {
-      if (!(title || department || details)) {
-        return res.status(422).json({ success: false, message: 'Enter a valid update' });
-      }
-      if (title) {
-        if (title.search(/[^A-Za-z\s]/) !== -1) {
-          errors.title = 'title must be alphabetical';
-        } else if (!(validator.isLength(title, { min: 3, max: 50 }))) {
-          errors.title = 'title must be between 3 to 50 characters';
-        }
-      }
-      if (details) {
-        if (!(validator.isLength(details, { min: 20, max: 1000 }))) {
-          errors.details = 'Details field must be between 20 to 1000 characters';
-        }
-      }
+      const check = checkItem({ title, department, details });
 
-      if (Object.keys(errors).length !== 0) {
-        return res.status(400).json(errors);
+      if (Object.keys(check).length > 0) {
+        return res.status(400).json(check);
       }
     }
     return next();

@@ -42,7 +42,7 @@ export default class userController {
   static userLogin(req, res) {
     const { email, password } = req.body;
     const errors = { form: 'Invalid email or password' };
-    const userQuery = 'SELECT email, password, id FROM users WHERE email = $1 LIMIT 1;';
+    const userQuery = 'SELECT * FROM users WHERE email = $1 LIMIT 1;';
     const params = [email];
     databaseLink.query(userQuery, params)
       .then((result) => {

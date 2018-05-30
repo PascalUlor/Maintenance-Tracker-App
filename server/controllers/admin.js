@@ -41,23 +41,23 @@ export default class adminController {
  * @returns {obj} success message
  */
   static getAllRequests(req, res) {
-    databaseLink.query('select * from requests', (error, result) => {
-      if (error) {
-        return res.status(404).json({
-          success: false,
-          message: 'No request available',
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: 'Successfully Retrieved all requests',
-        data: result.rows,
-      });
-    });
+    const checkId = 'SELECT * FROM users WHERE id = 1 LIMIT 1;';
+    const { userId } = req.decoded;
+    const userQuery = 'select * from requests';
+    databaseLink.query(checkId)
+      .then((result) => {
+        if (userId !== result.rows[0].id) {
+          return reqHelper.error(res, 400, 'Access Denied');
+        }
+        return databaseLink.query(userQuery)
+          .then(requests =>
+            reqHelper.success(res, 200, 'Successfully Retrieved all requests', requests.rows))
+          .catch(error => reqHelper.error(res, 500, error.toString()));
+      }).catch(error => reqHelper.error(res, 500, error.toString()));
   }
 
   /**
- * API method to mark request as approved by user
+ * API method to mark request as approved, disapproved or resolved by user
  * @param {obj} req
  * @param {obj} res
  * @param {obj} newStatus
@@ -65,11 +65,20 @@ export default class adminController {
  */
   static requestStatus(req, res, newStatus) {
     const id = parseInt(req.params.requestId, 10);
+    const checkId = 'SELECT * FROM users WHERE id = 1 LIMIT 1;';
+    const { userId } = req.decoded;
     const userQuery = 'UPDATE requests SET status = $1, updatedat = NOW() WHERE id = $2 returning *';
     const params = [newStatus, id];
-    databaseLink.query(userQuery, params)
-      .then(result =>
-        reqHelper.success(res, 200, 'Request approved', result.rows[0]))
-      .catch(error => reqHelper.error(res, 500, error.toString()));
+
+    databaseLink.query(checkId)
+      .then((result) => {
+        if (userId !== result.rows[0].id) {
+          return reqHelper.error(res, 400, 'Access Denied');
+        }
+        return databaseLink.query(userQuery, params)
+          .then(state =>
+            reqHelper.success(res, 200, newStatus, state.rows[0]))
+          .catch(error => reqHelper.error(res, 500, error.toString()));
+      }).catch(error => reqHelper.error(res, 500, error.toString()));
   }
 }

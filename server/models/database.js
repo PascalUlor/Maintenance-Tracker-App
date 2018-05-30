@@ -8,7 +8,7 @@ CREATE TABLE users (
   email text NOT NULL,
   password text NOT NULL
 );
-INSERT INTO users (firstName, lastName, role, email, password) VALUES ('Pascal', 'Ulor', 'Admin', 'pascal@andela.com', 12345);
+INSERT INTO users (firstName, lastName, role, email, password) VALUES ('Pascal', 'Ulor', 'Admin', 'pascal@andela.com', '$2b$10$Ax80YVp8EK5PUt/hyWx1IejBFTB7d.3wfLJw9vqa6Ermp4Db2/TF6');
 
 DROP TABLE IF EXISTS requests;
 CREATE TABLE requests (
@@ -24,3 +24,4 @@ CREATE TABLE requests (
   `;
 
 export default database;
+
