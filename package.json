@@ -1,6 +1,9 @@
 {
   "name": "maintenance-tracker-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.11.3"
+  },
   "description": "Maintenance Tracker App is an application that provides users with the ability to reach out to",
   "main": "app.js",
   "scripts": {
