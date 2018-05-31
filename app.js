@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
 
 // routes
 app.use('/api/v1/', routes);
-app.use('/api/v1/client/', express.static('client'));
+app.use('/api/v1/', express.static(`${__dirname}/client`));
 
 // Trivial Route
 app.get('*', (req, res) => {

@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>uHost</title>
-  <link rel="shortcut icon" href="../favicon.png">
+  <title>Maintenance Tracker</title>
+  <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-  <link rel="stylesheet" href="./css/main.css">
-  <link rel="stylesheet" href="./css/request.css">
+  <link rel="stylesheet" href="./public/css/main.css">
+  <link rel="stylesheet" href="./public/css/request.css">
 </head>
 
 <body>
@@ -37,7 +37,7 @@
           <a href="create-request.html">Services</a>
         </li>
         <li class="main-nav__item nav_button">
-          <a href="siginup.html">Get Started</a>
+          <a href="signup.html">Get Started</a>
         </li>
       </ul>
     </nav>
@@ -55,42 +55,52 @@
         <a href="create-request.html">Services</a>
       </li>
       <li class="mobile-nav__item mobile-nav_button">
-        <a href="siginup.html">Get Started</a>
+        <a href="signup.html">Get Started</a>
       </li>
     </ul>
   </nav>
-  <main>
+  <main class="sitewrap">
     <h1 class="request-list">REQUEST LIST</h1>
-    <section class="request plus">
+    <section class="search">
+      <div class="search-bar">
+        <input type="text" placeholder="Search..">
+      </div>
+      <select class="drop-down">
+        <option>By Date</option>
+        <option>By Name</option>
+      </select>
+    </section>
+    <section class="request wallpaper">
       <a href="#">
         <h1 class="request-title">David</h1>
-        <h2 class="resolved">RESOLVED</h2>
+        <button type="submit" class="resolved">RESOLVED</button>
         <button type="submit" class="approved">Approved</button>
         <button type="submit" class="disapproved">Disapproved</button>
-        <h2 class="sub-title">Work Description</h2>
-        <p class="page-info">is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs
-          department regarding repair or maintenance requests and monitor the status of their request.</p>
+        <h2 class="sub-title">Details</h2>
+        <p class="page-info">This is a fullstack javascript web application that provides users with the ability to reachout to the operations
+          or repairs department regarding repair or maintenance requests and monitor the status of their request.</p>
       </a>
     </section>
 
-    <section class="request plus">
+    <section class="request wallpaper">
       <a href="#">
         <h1 class="request-title">Joseph</h1>
-        <h2 class="resolved">RESOLVED</h2>
+        <button type="submit" class="resolved">RESOLVED</button>
         <button type="submit" class="approved">Approved</button>
         <button type="submit" class="disapproved">Disapproved</button>
-        <h2 class="sub-title">Work Description</h2>
-        <p class="page-info">Get started immediately at zero cost!</p>
+        <h2 class="sub-title">Details</h2>
+        <p class="page-info">This is a fullstack javascript web application that provides users with the ability to reachout to the operations
+          or repairs department regarding repair or maintenance requests and monitor the status of their request.</p>
       </a>
     </section>
 
-    <section class="request plus">
+    <section class="request wallpaper">
       <a href="#">
         <h1 class="request-title">Mary</h1>
-        <h2 class="resolved">RESOLVED</h2>
+        <button type="submit" class="resolved">RESOLVED</button>
         <button type="submit" class="approved">Approved</button>
         <button type="submit" class="disapproved">Disapproved</button>
-        <h2 class="sub-title">Work Description</h2>
+        <h2 class="sub-title">Details</h2>
         <p class="page-info">is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs
           department regarding repair or maintenance requests and monitor the status of their request.</p>
       </a>
@@ -108,7 +118,7 @@
       </ul>
     </nav>
   </footer>
-  <script src="./js/shared.js"></script>
+  <script src="./public/js/shared.js"></script>
 </body>
 
 </html>
