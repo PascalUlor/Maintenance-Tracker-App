@@ -65,7 +65,7 @@
         }
       },
       "post": {
-        "summary": "Make a request",
+        "summary": "Create a request",
         "tags": [
           "requests"
         ],
@@ -126,7 +126,7 @@
             "examples": {
               "application/json": {
                 "error": true,
-                "message": "Business Name Missing"
+                "message": "Title is undefined"
               }
             }
           }
@@ -213,11 +213,11 @@
         }
       }
     },
-    "/businesses/{id}": {
+    "/requests/{id}": {
       "get": {
-        "summary": "Info for a specific business",
+        "summary": "Info for a specific request",
         "tags": [
-          "business"
+          "requests"
         ],
         "produces": [
           "application/json"

@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
 import YAML from 'yamljs';
@@ -51,7 +52,7 @@ app.get('/', (req, res) => {
 
 // routes
 app.use('/api/v1/', routes);
-app.use('/api/v1/', express.static(`${__dirname}/client`));
+app.use('/api/v1/', express.static(path.join(__dirname, '/client')));
 
 // Trivial Route
 app.get('*', (req, res) => {
