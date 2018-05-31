@@ -1,0 +1,646 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API for Maintenance-Tracker-App",
+    "version": "1.0.0",
+    "title": "Maintenance-Tracker-App",
+    "contact": {
+      "email": "pascalulor@yahoo.com"
+    }
+  },
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "requests",
+      "description": "Request operations"
+    },
+    {
+      "name": "auth",
+      "description": "Operations for user details"
+    },
+    {
+      "name": "status",
+      "description": "Operations for status"
+    }
+  ],
+  "paths": {
+    "/users/requests": {
+      "get": {
+        "tags": [
+          "requests"
+        ],
+        "summary": "list all requests",
+        "description": "List all requests in for a user",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paged array of requests",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "Requests": [
+                  {
+                    "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "pending"
+                    
+                  },
+                  {
+                    "id": 2,
+                    "title": "Air condition repair",
+                    "userId": 2,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "approved"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a request",
+        "tags": [
+          "requests"
+        ],
+        "description": "Add request to the application",
+        "operationId": "add-requests",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "title",
+            "type": "string",
+            "description": "Title of request",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "details",
+            "type": "string",
+            "description": "Details of request"
+          },
+          {
+            "in": "formData",
+            "name": "department",
+            "type": "string",
+            "description": "Department making request"
+          },
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "description": "Token for accessing the endpoint",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request made successfully",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "message": "Request created successfully",
+                "business": {
+                  "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "pending",
+                  "token": "eyJhbGciOiJIUzI1NiIdssdjR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTIxMTk0MTE0LCJleHAiOjE1MjI0MDM3MTR9.OeN-Tut9xAg8wYUvC-RPLbTqIcGXH5zZamP_o5wTZrc"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "examples": {
+              "application/json": {
+                "error": true,
+                "message": "Title is undefined"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/requests/{id}": {
+      "get": {
+        "summary": "Info for a specific request",
+        "tags": [
+          "requests"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the request to retrieve",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, request with id found",
+            "examples": {
+              "application/json": {
+                "message": "Success",
+                "error": false,
+                "request": {
+                  "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "pending"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "request with id does not exist",
+            "examples": {
+              "application/json": {
+                "error": "true",
+                "message": "Request with not found"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update specific request",
+        "tags": [
+          "request"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The id of the request to update",
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "title",
+            "type": "string",
+            "description": "Title of request",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "details",
+            "type": "string",
+            "description": "Details of request",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "department",
+            "type": "string",
+            "description": "Department of request",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expected response to be valid request",
+            "examples": {
+              "application/json": {
+                "message": "Success",
+                "error": false,
+                "request": {
+                  "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "pending"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "request not found",
+            "examples": {
+              "application/json": {
+                "error": "true",
+                "message": "Request with id not found"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete specific a specific request",
+        "tags": [
+          "rerquest"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The id of the request to delete",
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "description": "Token for accessing endpoint",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request deleted",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "message": "Request deleted"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "examples": {
+              "application/json": {
+                "error": true,
+                "message": "Access Denied. You are not allowed to delete this request"
+              }
+            }
+          },
+          "404": {
+            "description": "request not found",
+            "examples": {
+              "application/json": {
+                "error": "true",
+                "message": "Request not found"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/requests": {
+      "get": {
+        "tags": [
+          "requests"
+        ],
+        "summary": "list all requests",
+        "description": "List all requests in for a user",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A paged array of requests",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "Requests": [
+                  {
+                    "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "pending"
+                    
+                  },
+                  {
+                    "id": 2,
+                    "title": "Air condition repair",
+                    "userId": 2,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "approved"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/requests/{id}/approved": {
+      "post": {
+        "tags": [
+          "status"
+        ],
+        "summary": "change request status",
+        "description": "Change status of request",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the request to add change status",
+            "type": "integer",
+            "minimum": 1,
+            "required": true
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "description": "Content of the request",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "description": "Token for accessing endpoint",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status Changed from pending to approved",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "request": {
+                  "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "Approved",
+                  "token": "eyJhbGciOiJIUzI1NiIdssdjR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTIxMTk0MTE0LCJleHAiOjE1MjI0MDM3MTR9.OeN-Tut9xAg8wYUvC-RPLbTqIcGXH5zZamP_o5wTZrc"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request could not be found",
+            "examples": {
+              "application/json": {
+                "error": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/requests/{id}/disapproved": {
+      "post": {
+        "tags": [
+          "status"
+        ],
+        "summary": "change request status",
+        "description": "Change status of request",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the request to change status",
+            "type": "integer",
+            "minimum": 1,
+            "required": true
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "description": "Content of the request",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "description": "Token for accessing endpoint",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status Changed from pending to disapproved",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "request": {
+                  "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "Dispproved",
+                  "token": "eyJhbGciOiJIUzI1NiIdssdjR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTIxMTk0MTE0LCJleHAiOjE1MjI0MDM3MTR9.OeN-Tut9xAg8wYUvC-RPLbTqIcGXH5zZamP_o5wTZrc"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request could not be found",
+            "examples": {
+              "application/json": {
+                "error": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/requests/{id}/resolved": {
+      "post": {
+        "tags": [
+          "status"
+        ],
+        "summary": "change request status",
+        "description": "Change status of request",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the request to add change status",
+            "type": "integer",
+            "minimum": 1,
+            "required": true
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "description": "Content of the request",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "token",
+            "type": "string",
+            "description": "Token for accessing endpoint",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status Changed from pending to resolved",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "request": {
+                  "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "Resolved",
+                  "token": "eyJhbGciOiJIUzI1NiIdssdjR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTIxMTk0MTE0LCJleHAiOjE1MjI0MDM3MTR9.OeN-Tut9xAg8wYUvC-RPLbTqIcGXH5zZamP_o5wTZrc"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request could not be found",
+            "examples": {
+              "application/json": {
+                "error": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "login a user",
+        "description": "Log in a user to the application",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email of the user",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "password of the user",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, user is logged in",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "message": "logged in successfully"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Input",
+            "examples": {
+              "application/json": {
+                "error": true,
+                "message": "Unable to login"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Signup a user",
+        "description": "Signup user into the application",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email of the user",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "password of the user",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "firstName",
+            "in": "formData",
+            "description": "User First Name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "lastName",
+            "in": "formData",
+            "description": "User Last name",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, user is signed up",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "message": "signup in successfully"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Input",
+            "examples": {
+              "application/json": {
+                "error": true,
+                "message": "Unable to login"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
-import reqHelper from '../helpers/reqHelper';
+import reqHelper from '../helpers/requestHelper';
 import db from '../models/testData';
-import databaseLink from '../models/databaseLink';
+import databaseLink from '../models/databaseConnection';
 
 const dotenv = require('dotenv');
 

@@ -1,6 +1,9 @@
 {
   "name": "maintenance-tracker-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.11.3"
+  },
   "description": "Maintenance Tracker App is an application that provides users with the ability to reach out to",
   "main": "app.js",
   "scripts": {
@@ -25,13 +28,7 @@
   },
   "homepage": "https://github.com/PascalUlor/Maintenance-Tracker-App#readme",
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -39,6 +36,9 @@
   },
   "dependencies": {
     "app-root-path": "^2.0.1",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import reqHelper from './reqHelper';
+import reqHelper from './requestHelper';
 
 dotenv.config();
 

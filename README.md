@@ -5,11 +5,15 @@
 
 **Maintenance-Tracker-App** is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs department regarding repair or maintenance requests and monitor the status of their request.
 
+<img width="1440" alt="Hellobooks-screenshot" src="/UI/public/images/homepage.jpg">
+<br />
+
 
 # Table Of Content
 1. [Getting Started](#getting-started "Getting Started")
    ..*[prerequisites](#prerequisites "Prerequisites")
    ..*[Installation](#installation "Installation")
+   ..* [Dependencies](#dependencies)
 2. [Features](#features "Features")
 3. [Built With](#built-with "Built With")
 4. [Deployment](#deployment "Deployment")
@@ -32,7 +36,7 @@ SQL (Postgres)
 Version Control (Git)
 ```
 
-## Installation
+### Installation
 The follwing instructions will install the project on your local machine
 
 ```
@@ -42,6 +46,10 @@ The follwing instructions will install the project on your local machine
 4. [**cd**] into the root directory of the project.
 5. Run `npm install` on the terminal to install Dependecies and Dev-Dependecies
 ```
+
+### Dependencies
+* Postgres
+* Node
 
 ## Features
 The user interface is built for easy navigation and use of the application. It includes the following:
