@@ -1,6 +1,6 @@
 import validator from 'validator';
 import bcrypt from 'bcrypt';
-import databaseLink from '../models/databaseLink';
+import databaseLink from '../models/databaseConnection';
 
 const dotenv = require('dotenv');
 

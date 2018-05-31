@@ -1,5 +1,5 @@
 import winston from '../config/winston';
-import database from './database';
+import database from './databaseQuery';
 
 const { Client } = require('pg');
 
@@ -28,7 +28,7 @@ const connect = () => {
 
 connect();
 
-const databaseLink = {
+const databaseConnection = {
   query: (text, params, callback) => client.query(text, params, callback),
 };
-export default databaseLink;
+export default databaseConnection;

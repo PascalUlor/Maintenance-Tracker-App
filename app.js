@@ -25,22 +25,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('combined', { stream: winston.stream }));
 
-// error handler
 app.use((err, req, res, next) => {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // add this line to include winston logging
   winston.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
   next();
 });
 
-// Home page route
 app.get('/', (req, res) => {
   res.status(200);
   res.json({
@@ -50,11 +45,9 @@ app.get('/', (req, res) => {
 });
 
 
-// routes
 app.use('/api/v1/', routes);
 app.use('/client', express.static(path.join(__dirname, 'client')));
 
-// Trivial Route
 app.get('*', (req, res) => {
   res.status(404).json({
     message: 'Invalid routes',
