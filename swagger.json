@@ -133,86 +133,6 @@
         }
       }
     },
-    "/businesses?location={location}": {
-      "get": {
-        "tags": [
-          "business"
-        ],
-        "summary": "list businesses in location",
-        "operationId": "location",
-        "description": "List all busnesses in a given location",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "description": "The location of the business to retrieve",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A paged array of businesses",
-            "examples": {
-              "application/json": {
-                "error": false,
-                "message": "New Business Added",
-                "business": {
-                  "id": 1,
-                  "name": "Andela",
-                  "details": "Hire the best software engineers",
-                  "category": "Ict",
-                  "location": "Lagos"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/businesses?category={category}": {
-      "get": {
-        "tags": [
-          "business"
-        ],
-        "summary": "list all businesses",
-        "operationId": "category",
-        "description": "List all businesses in a category",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "category",
-            "in": "path",
-            "required": true,
-            "description": "The category of the business to retrieve",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A paged array of businesses",
-            "examples": {
-              "application/json": {
-                "error": false,
-                "message": "New Business Added",
-                "business": {
-                  "id": 1,
-                  "name": "Andela",
-                  "details": "Hire the best software engineers",
-                  "category": "Ict",
-                  "location": "Lagos"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/requests/{id}": {
       "get": {
         "summary": "Info for a specific request",
@@ -227,43 +147,43 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "The id of the business to retrieve",
+            "description": "The id of the request to retrieve",
             "type": "integer"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success, business found",
+            "description": "Success, request with id found",
             "examples": {
               "application/json": {
                 "message": "Success",
                 "error": false,
-                "business": {
-                  "id": 3,
-                  "name": "Bukka",
-                  "details": "Delicious Foods",
-                  "location": "Lagos",
-                  "category": "Resturant",
-                  "reviews": []
+                "request": {
+                  "id": 1,
+                    "title": "Andela",
+                    "userId": 3,
+                    "department": "Lagos",
+                    "details": "Hire the best software engineers",
+                    "status": "pending"
                 }
               }
             }
           },
           "404": {
-            "description": "business not found",
+            "description": "request with id does not exist",
             "examples": {
               "application/json": {
                 "error": "true",
-                "message": "Business not found"
+                "message": "Request with not found"
               }
             }
           }
         }
       },
       "put": {
-        "summary": "update specific business",
+        "summary": "update specific request",
         "tags": [
-          "business"
+          "request"
         ],
         "produces": [
           "application/json"
