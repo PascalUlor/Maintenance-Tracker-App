@@ -41,6 +41,12 @@ paths:
                   department: Lagos
                   details: Hire the best software engineers
                   status: approved
+        '404':
+          description: An empty array of requests
+          examples:
+            application/json:
+              error: false
+              Requests: []
     post:
       summary: Create a request
       tags:
