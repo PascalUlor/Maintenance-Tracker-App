@@ -10,6 +10,7 @@ main {
     justify-content: center;
     width: 100vw;
     min-height: 87vh;
+    margin-top: 0.5rem;
 }
 
 .form-title {
@@ -27,6 +28,12 @@ main {
 .input-form [type="text"] {
     height: 2rem;
     flex-shrink: 1;
+}
+
+.input-form [type="textarea"] {
+    height: 4rem;
+    flex-shrink: 1;
+    font-size: 1.5rem;
 }
 
 .input-form label {
@@ -85,6 +92,12 @@ main {
     .input-form [type="email"],
     .input-form [type="password"],
     .input-form [type="text"] {
+        height: 3rem;
+        width: 30rem;
+        font-size: 1.5rem;
+    }
+
+    .input-form [type="textarea"] {
         height: 3rem;
         width: 30rem;
         font-size: 1.5rem;
