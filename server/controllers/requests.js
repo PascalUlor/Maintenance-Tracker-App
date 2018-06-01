@@ -1,6 +1,6 @@
 import reqHelper from '../helpers/requestHelper';
 import db from '../models/testData';
-import databaseLink from '../models/databaseConnection';
+import databaseConnection from '../models/databaseConnection';
 
 const dotenv = require('dotenv');
 
@@ -23,7 +23,7 @@ export default class requestController {
     const { userId } = req.decoded;
     const userQuery = 'INSERT INTO requests (title, department, details, userId, status) VALUES($1, $2, $3, $4, $5) RETURNING *';
     const params = [title, department, details, userId, 'pending'];
-    databaseLink.query(userQuery, params)
+    databaseConnection.query(userQuery, params)
       .then(result => reqHelper.success(
         res, 201,
         'Request created successfully', result.rows[0],
@@ -41,7 +41,7 @@ export default class requestController {
     const { userId } = req.decoded;
     const checkId = 'SELECT * FROM requests WHERE userId = $1;';
     const value = [userId];
-    databaseLink.query(checkId, value)
+    databaseConnection.query(checkId, value)
       .then((result) => {
         if (result.rows.length > 0) {
           reqHelper.success(res, 200, 'Requests with userId successfully retrieved', result.rows);
@@ -62,7 +62,7 @@ export default class requestController {
     const { userId } = req.decoded;
     const checkId = 'SELECT * FROM requests WHERE userId = $1 AND id = $2 LIMIT 1;';
     const value = [userId, id];
-    databaseLink.query(checkId, value)
+    databaseConnection.query(checkId, value)
       .then((result) => {
         if (result.rows[0]) {
           reqHelper.success(res, 200, 'User request successfully retrieved', result.rows);
@@ -87,14 +87,14 @@ export default class requestController {
     const value = [id];
     const userQuery = 'UPDATE requests SET title = $1, department = $2, details = $3 WHERE id = $4 RETURNING *';
     const params = [title, department, details, id];
-    databaseLink.query(checkId, value)
+    databaseConnection.query(checkId, value)
       .then((result) => {
         if (!result.rows[0]) {
           return reqHelper.error(res, 400, 'Request with id does not exist');
-        } else if (userId !== result.rows[0].userid) {
+        } else if (userId !== result.rows[0].userid || result.rows[0].status !== 'pending') {
           return reqHelper.error(res, 400, 'Access Denied. You are not authorized to update this request');
         }
-        return databaseLink.query(userQuery, params)
+        return databaseConnection.query(userQuery, params)
           .then(update =>
             reqHelper.success(res, 200, 'Request with id successfully updated', update.rows[0]))
           .catch(error => reqHelper.error(res, 500, error.toString()));

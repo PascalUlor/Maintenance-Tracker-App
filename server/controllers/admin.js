@@ -1,6 +1,6 @@
 import reqHelper from '../helpers/requestHelper';
 import db from '../models/testData';
-import databaseLink from '../models/databaseConnection';
+import databaseConnection from '../models/databaseConnection';
 
 const dotenv = require('dotenv');
 
@@ -44,12 +44,12 @@ export default class adminController {
     const checkId = 'SELECT * FROM users WHERE id = 1 LIMIT 1;';
     const { userId } = req.decoded;
     const userQuery = 'select * from requests';
-    databaseLink.query(checkId)
+    databaseConnection.query(checkId)
       .then((result) => {
         if (userId !== result.rows[0].id) {
           return reqHelper.error(res, 400, 'Access Denied');
         }
-        return databaseLink.query(userQuery)
+        return databaseConnection.query(userQuery)
           .then(requests =>
             reqHelper.success(res, 200, 'Successfully Retrieved all requests', requests.rows))
           .catch(error => reqHelper.error(res, 500, error.toString()));
@@ -70,12 +70,12 @@ export default class adminController {
     const userQuery = 'UPDATE requests SET status = $1, updatedat = NOW() WHERE id = $2 returning *';
     const params = [newStatus, id];
 
-    databaseLink.query(checkId)
+    databaseConnection.query(checkId)
       .then((result) => {
         if (userId !== result.rows[0].id) {
           return reqHelper.error(res, 400, 'Access Denied');
         }
-        return databaseLink.query(userQuery, params)
+        return databaseConnection.query(userQuery, params)
           .then(state =>
             reqHelper.success(res, 200, newStatus, state.rows[0]))
           .catch(error => reqHelper.error(res, 500, error.toString()));

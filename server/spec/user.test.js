@@ -24,7 +24,7 @@ describe('All Test cases for user Signup', () => {
         expect(res.body.message).to.equal('Signup successfull');
         expect(res.body.user).to.eql({
           userId: 2,
-          fullName: 'BruceBanner',
+          fullName: 'Bruce Banner',
           email: 'banner@yahoo.com',
           role: 'user',
         });
@@ -43,7 +43,7 @@ describe('All Test cases for user Signup', () => {
         expect(res.body.message).to.equal('Signup successfull');
         expect(res.body.user).to.eql({
           userId: 3,
-          fullName: 'MikeOwen',
+          fullName: 'Mike Owen',
           email: 'mk@yahoo.com',
           role: 'user',
         });
@@ -60,13 +60,9 @@ describe('All Test cases for user Signup', () => {
       })
       .expect(400)
       .end((err, res) => {
-        expect(res.body.firstName).to.equal(undefined);
-        expect(res.body.lastName).to.equal(undefined);
-        expect(res.body.email).to.equal(undefined);
-        expect(res.body).deep.equal({
-          success: false,
-          message: 'Some or all fields are undefined',
-        });
+        expect(res.body.firstName).to.equal('firstName field is undefined');
+        expect(res.body.lastName).to.equal('lastName field is undefined');
+        expect(res.body.email).to.equal('email field is undefined');
         if (err) done(err);
         done();
       });
@@ -100,10 +96,10 @@ describe('All Test cases for user Signup', () => {
       .send(inputs.emptyData)
       .expect(400)
       .end((err, res) => {
-        expect(res.body.firstName).to.eql('first name is required');
-        expect(res.body.lastName).to.eql('last name is required');
-        expect(res.body.email).to.eql('email is required');
-        expect(res.body.password).to.eql('password is required');
+        expect(res.body.firstName).to.eql('firstName field is undefined');
+        expect(res.body.lastName).to.eql('lastName field is undefined');
+        expect(res.body.email).to.eql('email field is undefined');
+        expect(res.body.password).to.eql('password field is undefined');
         expect(res.status).to.equal(400);
         done();
       });

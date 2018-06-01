@@ -5,6 +5,7 @@ import supertest from 'supertest';
 import chai from 'chai';
 import app from '../../app';
 import data from './seed/user.data';
+import input from './seed/requests.data';
 
 const adminToken = { token: null };
 const { expect } = chai;
@@ -62,33 +63,33 @@ describe('test cases for request status', () => {
   it('should return success message when approved successfully', (done) => {
     request.get('/api/v1/requests/1/approve')
       .set('x-access-token', adminToken.token)
-      .send({})
+      .send(input.validData1)
       .expect(200)
       .end((err, res) => {
         expect(res.body.success).to.equal(true);
-        expect(res.body.message).to.equal('Approved');
+        expect(res.body.status).to.equal('Approved');
         done();
       });
   });
   it('should return `200` status code success message if successfull', (done) => {
     request.get('/api/v1/requests/1/disapprove')
       .set('x-access-token', adminToken.token)
-      .send({})
+      .send(input.validData1)
       .expect(200)
       .end((err, res) => {
         expect(res.body.success).to.equal(true);
-        expect(res.body.message).to.equal('Disapproved');
+        expect(res.body.status).to.equal('Disapproved');
         done();
       });
   });
   it('should return `200` status code with `res.body` success message', (done) => {
     request.get('/api/v1/requests/1/resolved')
       .set('x-access-token', adminToken.token)
-      .send({})
+      .send(input.validData1)
       .expect(200)
       .end((err, res) => {
         expect(res.body.success).to.equal(true);
-        expect(res.body.message).to.equal('Resolved');
+        expect(res.body.status).to.equal('Resolved');
         done();
       });
   });

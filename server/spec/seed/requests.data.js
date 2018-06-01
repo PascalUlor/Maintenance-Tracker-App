@@ -3,6 +3,7 @@ export default {
     title: 'Pascal',
     department: 'Lagos',
     details: 'Requests Details must be between 20 to 1000 characters',
+    status: 'pending',
   },
   validData2: {
     title: 'Pascal',
