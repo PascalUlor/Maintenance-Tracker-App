@@ -108,7 +108,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .send(inputs.invalidData)
         .expect(400)
         .end((err, res) => {
-          expect(res.body).to.have.property('title').eql('title must be alphabetical');
+          expect(res.body).to.have.property('title').eql('title can only be alphabetical');
           expect(res.status).to.equal(400);
           done();
         });
@@ -185,7 +185,7 @@ describe('All test cases for Maintenance-Tracker application', () => {
         .send(inputs.invalidData)
         .expect(400)
         .end((err, res) => {
-          expect(res.body.title).to.eql('title must be alphabetical');
+          expect(res.body.title).to.eql('title can only be alphabetical');
           expect(res.status).to.equal(400);
           done();
         });

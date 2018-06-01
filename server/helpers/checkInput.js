@@ -11,12 +11,8 @@ const checkItem = (inputValue) => {
       *Request Validation
       */
       if (key === 'title') {
-        if (!validator.isEmpty(inputValue[key])) {
-          if (inputValue[key].search(/[^A-Za-z\s]/) !== -1) {
-            errors[key] = `${key} must be alphabetical`;
-          } else if (!(validator.isLength(inputValue[key], { min: 3, max: 50 }))) {
-            errors[key] = `${key} must be between 3 to 50 characters`;
-          }
+        if (!(validator.isLength(inputValue[key], { min: 3, max: 50 }))) {
+          errors[key] = `${key} must be between 3 to 50 characters`;
         }
       }
       if (key === 'details') {
@@ -29,7 +25,7 @@ const checkItem = (inputValue) => {
       /*
       *User Validation
       */
-      if (key === 'firstName' || key === 'lastName') {
+      if (key === 'firstName' || key === 'lastName' || key === 'title') {
         if (!(validator.isEmpty(inputValue[key]))) {
           if (inputValue[key].search(/[^A-Za-z\s]/) !== -1) {
             errors[key] = `${key} can only be alphabetical`;
