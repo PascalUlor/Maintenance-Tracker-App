@@ -1,11 +1,10 @@
-import validator from 'validator';
 import bcrypt from 'bcrypt';
+import checkItem from '../helpers/checkInput';
 import databaseLink from '../models/databaseConnection';
 
 const dotenv = require('dotenv');
 
 dotenv.config();
-
 
 /**
  * Validates all routes
@@ -29,8 +28,6 @@ export default class userValidation {
       const {
         firstName, lastName, email, password = hash,
       } = req.body;
-      const errors = {};
-
       const userEmail = {
         text: 'SELECT * FROM users WHERE email = $1;',
         values: [req.body.email],
@@ -43,34 +40,12 @@ export default class userValidation {
           });
         }
 
-        if (firstName === undefined || lastName === undefined || password === undefined
-          || email === undefined) {
-          res.status(400);
-          res.json({
-            success: false,
-            message: 'Some or all fields are undefined',
-          });
-        } else {
-          if (validator.isEmpty(firstName)) {
-            errors.firstName = 'first name is required';
-          }
-
-          if (validator.isEmpty(lastName)) {
-            errors.lastName = 'last name is required';
-          }
-
-          if (!(validator.isEmail(email))) {
-            errors.email = 'email is required';
-          }
-          if (validator.isEmpty(password)) {
-            errors.password = 'password is required';
-          }
-
-          if (Object.keys(errors).length !== 0) {
-            return res.status(400).json(errors);
-          }
-        }
-        return next();
+        const check = checkItem({
+          firstName, lastName, email, password,
+        });
+        if (Object.keys(check).length > 0) {
+          return res.status(400).json(check);
+        } return next();
       });
     });
   }
