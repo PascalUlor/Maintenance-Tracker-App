@@ -61,6 +61,15 @@
                 ]
               }
             }
+          },
+          "404": {
+            "description": "A paged array of requests",
+            "examples": {
+              "application/json": {
+                "error": false,
+                "Requests": []
+              }
+            }
           }
         }
       },

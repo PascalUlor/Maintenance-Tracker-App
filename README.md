@@ -5,7 +5,9 @@
 
 **Maintenance-Tracker-App** is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs department regarding repair or maintenance requests and monitor the status of their request.
 
-<img width="1440" alt="Hellobooks-screenshot" src="/UI/public/images/homepage.jpg">
+<br />
+<br />
+<img width="1440" alt="Maintenance-Tracker-App-screenshot" src="/screenshot/homepage.png">
 <br />
 
 
@@ -13,13 +15,13 @@
 1. [Getting Started](#getting-started "Getting Started")
    ..*[prerequisites](#prerequisites "Prerequisites")
    ..*[Installation](#installation "Installation")
+2. [Technology Stack](#technology-stack)
    ..* [Dependencies](#dependencies)
 2. [Features](#features "Features")
 3. [Built With](#built-with "Built With")
 4. [Deployment](#deployment "Deployment")
-5. [Author](#author "Author")
-6. [License](#license "Deployment")
-7. [Acknowledgment](#acknowledgment "Acknowledgment")
+5. [Useful Links](#author "Useful Links")
+6. [Acknowledgment](#acknowledgment "Acknowledgment")
 
 
 ## Getting Started
@@ -47,9 +49,22 @@ The follwing instructions will install the project on your local machine
 5. Run `npm install` on the terminal to install Dependecies and Dev-Dependecies
 ```
 
+## Technology Stack
+**UI & Templates**
+1. HTML & CSS
+2. Javascript
+
+**Server Side**
+1. NodeJS
+2. Express
+
+**Client Side**
+1. Javascript
+
 ### Dependencies
 * Postgres
 * Node
+
 
 ## Features
 The user interface is built for easy navigation and use of the application. It includes the following:
@@ -60,6 +75,28 @@ The user interface is built for easy navigation and use of the application. It i
 4. The admin should be able to view all maintenance/repairs requests on the application
 5. The user can view all his/her requests
 
+### Authentication
+
+- It uses JSON Web Token (JWT) for authentication.
+- Token is generated on user login
+- Token is perpetually verified to check the state of the user if logged in or not.
+- Admin User will br pre-seeded into the application with administrative priviledges
+
 
 ## Deployment
-This Application will be deployed on Heroku (https://maintenance-software.herokuapp.com/api/v1/users/requests)
+This Application will be deployed on Heroku (https://maintenance-software.herokuapp.com)
+
+
+## Useful Links
+
+1. [Heroku](https://maintenance-software.herokuapp.com)
+2. [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2171599)
+3. [Gh-Pages](https://pascalulor.github.io/Maintenance-Tracker-App/UI/index.html)
+4. [Github Repo](https://github.com/PascalUlor/Maintenance-Tracker-App)
+5. [API-DOCUMENTATION](https://maintenance-software.herokuapp.com/api-docs)
+
+
+## Acknowledgment
+- Andela
+- Benny Ogidan
+- Kelechi Iheanyichukwu
