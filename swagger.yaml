@@ -5,7 +5,7 @@ info:
   title: Maintenance-Tracker-App
   contact:
     email: pascalulor@yahoo.com
-basePath: /api/v1
+basePath: https://maintenance-software.herokuapp.com/api/v1
 tags:
   - name: requests
     description: Request operations
