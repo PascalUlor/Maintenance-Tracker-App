@@ -7,7 +7,7 @@
 
 <br />
 <br />
-<img width="1440" alt="Maintenance-Tracker-App-screenshot" src="/screenshot/homepage.png">
+<img width="1000" height="400" alt="Maintenance-Tracker-App-screenshot" src="/screenshot/homepage.png">
 
 <br />
 
