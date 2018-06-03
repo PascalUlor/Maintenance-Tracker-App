@@ -12,3 +12,5 @@ server/dist/
 .vscode
 
 logs/
+
+npm-debug.log

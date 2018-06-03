@@ -10,7 +10,6 @@ main {
     justify-content: center;
     width: 100vw;
     min-height: 87vh;
-    margin-top: 0.5rem;
 }
 
 .form-title {
@@ -73,7 +72,7 @@ main {
 }
 
 @media (min-width: 40rem) {
-    .signup-page {
+    .input-page {
         background-image: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent);
         display: flex;
         flex-direction: column;
