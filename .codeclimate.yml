@@ -48,7 +48,7 @@ plugins:
  brakeman:
   enabled: false
 exclude_patterns:
-- "config/"
+- "**/config/"
 - "db/"
 - "dist/"
 - "features/"
