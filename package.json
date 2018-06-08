@@ -11,6 +11,7 @@
     "start:dev": "nodemon --watch server --exec babel-node -- app.js",
     "test": "set NODE_ENV=test&&nyc --reporter=lcov --reporter=text mocha --timeout 10000 --exit --compilers js:babel-core/register server/spec/*test.js || true",
     "build": "babel server -d server/dist --copy-files --ignore server/dist",
+    "build:client": "babel client -d client/dist --copy-files --ignore client/dist",
     "postinstall": "npm run build",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",

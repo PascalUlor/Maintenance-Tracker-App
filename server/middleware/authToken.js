@@ -16,7 +16,7 @@ dotenv.config();
  * @returns {object}
  */
 const authToken = (req, res, next) => {
-  const token = req.body.token || req.query.token || req.headers['x-access-token'];
+  const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers.authorization.split(' ')[1];
   // decode token
   if (token) {
     // verifies token and checks if expired or invalid

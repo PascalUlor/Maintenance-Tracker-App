@@ -10,6 +10,16 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 0;
+    margin-bottom: 5rem;
+}
+
+#request {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
 }
 
 .search {
@@ -104,6 +114,8 @@ main {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-top: 0;
+    margin-bottom: 19rem;
     }
     .request {
         width: 50%;
