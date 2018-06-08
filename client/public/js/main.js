@@ -20,8 +20,9 @@ const animate = () => {
   backdrop.addEventListener('click', removeBackDrop);
 };
 
-animate().then(() => {
+if (animate) {
+  animate();
+} else {
   backdrop.removeEventListener('click', removeBackDrop);
   toggleButton.removeEventListener('click', mobileButton);
-});
-
+}

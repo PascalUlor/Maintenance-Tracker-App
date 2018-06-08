@@ -1,7 +1,10 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=930e951dc62fddaa6254eb19cbc36c02ceba13bc8a27078e9783e5e6527811d7
 language: node_js
 
 node_js:
-  - 8.2.1
+  - 6.11.3
 dist: trusty
 addons:
   chrome: stable

@@ -97,7 +97,7 @@ main {
     }
 
     .input-form [type="textarea"] {
-        height: 3rem;
+        height: 5rem;
         width: 30rem;
         font-size: 1.5rem;
     }

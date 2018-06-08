@@ -14,7 +14,7 @@ const authLogin = () => {
     headers: {
       Accept: 'application/json, text/plain, */*',
       'Content-type': 'application/json',
-      Authorization: `user token ${localStorage.token}`,
+      Authorization: localStorage.token,
     },
   }).then(res => res.json()).then((data) => {
     if (data.success === false) window.location.replace('user-page.html');
@@ -55,11 +55,12 @@ if (signupForm) {
             window.location.replace('user-page.html');
           }, 5000);
         } else {
-          Object.keys(inputValue).forEach((key) => {
-            document.querySelector('#signup-form')
-              .innerHTML = `<h2>Signup invalid<h2/>
-          <h3>${data[key]}<h3/>`;
+          let output = '<h3>Error<h3/>';
+          Object.keys(data).forEach((key) => {
+            output += `<p>${data[key]}<p/>`;
           });
+          document.querySelector('#signup-form')
+            .innerHTML = output;
         }
       }).catch((error) => {
         document.querySelector('#output')
