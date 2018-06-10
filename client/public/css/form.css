@@ -79,15 +79,15 @@ main {
         align-items: center;
         justify-content: center;
         width: 100vw;
-        min-height: 87vh;
+        min-height: 93vh;
     }
     .input-form {
         align-content: center;
         justify-content: center;
     }
-    .form-title {
+    /* .form-title {
         margin-top: 5rem;
-    }
+    } */
     .input-form [type="email"],
     .input-form [type="password"],
     .input-form [type="text"] {
