@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Yantramanav');
 @import url('https://fonts.googleapis.com/css?family=Philosopher');
-
 main {
     padding-top: 2rem;
+    grid-area: main;
 }
 
 .sitewrap {
@@ -11,23 +11,13 @@ main {
     align-items: center;
     justify-content: center;
     margin-top: 0;
-    margin-bottom: 5rem;
-}
-
-#request {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
 }
 
 .search {
     display: flex;
 }
 
-.search-bar input[type=text],
-.drop-down {
+.search-bar input[type=text], .drop-down {
     padding: 6px;
     border: none;
     margin-top: 8px;
@@ -44,14 +34,23 @@ main {
     z-index: -1;
 }
 
+#request {
+    display: grid;
+    grid-template-rows: repeat(3, fit-content(15rem));
+    grid-gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
 .request {
-    margin: 1rem 0;
+    margin: 0.5rem;
     border: 4px solid #0e4f1f;
+    padding: 1rem;
     flex-shrink: 0;
 }
 
-.request:hover,
-.request:active {
+.request:hover, .request:active {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     border-color: #1976D2;
 }
@@ -59,31 +58,55 @@ main {
 .request a {
     text-decoration: none;
     color: inherit;
-    display: block;
-    padding: 2rem;
 }
 
-.resolved {
-    font-size: 0.8rem;
+.resolved, .unresolved {
+    font-size: 0.5rem;
     color: #000000;
     background: #FFFFFF;
     padding: 0.5rem;
     border: 1.5px solid #000000;
-    padding: 0.5rem;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
+    flex-shrink: 0;
 }
+.approved, .edit {
+	font-size: 0.5rem;
+	background: #2ddf5c;
+	color: #FFFFFF;
+	border: 1.5px solid #2ddf5c;
+	padding: 0.5rem;
+	border-radius: 8px;
+	font-weight: bold;
+	cursor: pointer;
+	text-decoration: none;
+	flex-shrink: 0;
+}
+
+.disapproved, .delete {
+	font-size: 0.5rem;
+	background: #FF5252;
+	color: #FFFFFF;
+	border: 1.5px solid #FF5252;
+	padding: 0.5rem;
+	border-radius: 8px;
+	font-weight: bold;
+	cursor: pointer;
+	text-decoration: none;
+	flex-shrink: 0;
+}
+
 
 .request-list {
     color: #FFFFFF;
     margin: 4rem;
     width: 30rem;
-      height: 2rem;
-      display: flex;
-      justify-content: center;
-  	background: rgba(0, 0, 0, 0.5);
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .sub-title {
@@ -115,23 +138,30 @@ main {
         align-items: center;
         justify-content: center;
         margin-top: 0;
-    margin-bottom: 19rem;
+    }
+    #request {
+        display: grid;
+        grid-template-columns: repeat(3, 25%);
+        grid-template-rows: repeat(3, fit-content(15rem));
+        grid-gap: 0.5rem;
+        margin-top: 1rem;
+        justify-content: center;
+        align-items: center;
     }
     .request {
-        width: 50%;
-        margin: 1rem 0;
+        width: 100%;
+        height: 100%;
         border: 4px solid #0e4f1f;
+        padding: 1rem;
     }
     .request a {
         text-decoration: none;
         color: inherit;
-        display: block;
-        padding: 2rem;
     }
     .page-info {
         padding: 1rem;
         border: 1px solid #0e4f1f;
-        font-size: 1.2rem;
+        font-size: 0.7rem;
         color: #0e4f1f;
         background: #FFFFFF;
     }

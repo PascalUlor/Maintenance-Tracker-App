@@ -74,9 +74,9 @@ const showRequest = () => {
     <a href="#">
       <h1 class="request-title">${title}</h1>
       <small class="sub-title">${department}</small>
-      <button type="submit" class="resolved">RESOLVED</button>
-      <button type="submit" class="approved">EDIT</button>
-      <button type="submit" class="disapproved">DELETE</button>
+      <button type="submit" class="unresolved">UNRESOLVED</button>
+      <button type="submit" class="edit">EDIT</button>
+      <button type="submit" class="delete">DELETE</button>
       <h2 class="sub-title">Details</h2>
       <p class="page-info">${details}</p>
     </a>

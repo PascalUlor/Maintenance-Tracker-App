@@ -36,17 +36,8 @@ app.use((err, req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.status(200);
-  res.json({
-    name: 'Welcome to Maintenance Tracker',
-    message: 'Your Service, Our Pleasure',
-  });
-});
-
-
 app.use('/api/v1/', routes);
-app.use('/client', express.static(path.join(__dirname, 'client')));
+app.use('/', express.static(path.join(__dirname, 'client')));
 
 app.get('*', (req, res) => {
   res.status(404).json({
