@@ -5,7 +5,7 @@ import supertest from 'supertest';
 import chai from 'chai';
 import app from '../../app';
 import data from './seed/user.data';
-import input from './seed/requests.data';
+import userToken from './user.test';
 
 const adminToken = { token: null };
 const { expect } = chai;
@@ -57,39 +57,59 @@ describe('test cases to Get All users request', () => {
         done();
       });
   });
+  it('should return 401 status code with `res.body` failure message if user is not admin', (done) => {
+    request.get('/api/v1/requests')
+      .set('x-access-token', userToken)
+      .send({})
+      .expect(401)
+      .end((err, res) => {
+        expect(res.body.success).to.equal(false);
+        expect(res.body.errors).to.equal('Authentication failed. Token is invalid or expired');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
 });
 
 describe('test cases for request status', () => {
   it('should return success message when approved successfully', (done) => {
-    request.get('/api/v1/requests/1/approve')
+    request.put('/api/v1/requests/1/approve')
       .set('x-access-token', adminToken.token)
-      .send(input.validData1)
       .expect(200)
       .end((err, res) => {
         expect(res.body.success).to.equal(true);
-        expect(res.body.status).to.equal('Approved');
+        expect(res.body.message).to.equal('Approved');
         done();
       });
   });
   it('should return `200` status code success message if successfull', (done) => {
-    request.get('/api/v1/requests/1/disapprove')
+    request.put('/api/v1/requests/1/disapprove')
       .set('x-access-token', adminToken.token)
-      .send(input.validData1)
       .expect(200)
       .end((err, res) => {
         expect(res.body.success).to.equal(true);
-        expect(res.body.status).to.equal('Disapproved');
+        expect(res.body.message).to.equal('Disapproved');
         done();
       });
   });
   it('should return `200` status code with `res.body` success message', (done) => {
-    request.get('/api/v1/requests/1/resolved')
+    request.put('/api/v1/requests/1/resolved')
       .set('x-access-token', adminToken.token)
-      .send(input.validData1)
       .expect(200)
       .end((err, res) => {
         expect(res.body.success).to.equal(true);
-        expect(res.body.status).to.equal('Resolved');
+        expect(res.body.message).to.equal('Resolved');
+        done();
+      });
+  });
+  it('should return 401 status code with `res.body` failure message if user is not admin', (done) => {
+    request.put('/api/v1/requests/1/resolved')
+      .set('x-access-token', userToken)
+      .expect(401)
+      .end((err, res) => {
+        expect(res.body.success).to.equal(false);
+        expect(res.body.errors).to.equal('Authentication failed. Token is invalid or expired');
+        expect(res.status).to.equal(401);
         done();
       });
   });

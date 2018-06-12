@@ -47,7 +47,7 @@ export default class adminController {
     databaseConnection.query(checkId)
       .then((result) => {
         if (userId !== result.rows[0].id) {
-          return reqHelper.error(res, 400, 'Access Denied');
+          return reqHelper.error(res, 401, 'Authentication failed. Token is invalid or expired');
         }
         return databaseConnection.query(userQuery)
           .then(requests =>
@@ -65,7 +65,7 @@ export default class adminController {
  */
   static requestStatus(req, res, newStatus) {
     const id = parseInt(req.params.requestId, 10);
-    const checkId = 'SELECT * FROM users WHERE id = 1 LIMIT 1;';
+    const checkId = 'SELECT * FROM users WHERE id = 1 LIMIT 1';
     const { userId } = req.decoded;
     const userQuery = 'UPDATE requests SET status = $1, updatedat = NOW() WHERE id = $2 returning *';
     const params = [newStatus, id];
@@ -73,7 +73,7 @@ export default class adminController {
     databaseConnection.query(checkId)
       .then((result) => {
         if (userId !== result.rows[0].id) {
-          return reqHelper.error(res, 400, 'Access Denied');
+          return reqHelper.error(res, 401, 'Authentication failed. Token is invalid or expired');
         }
         return databaseConnection.query(userQuery, params)
           .then(state =>
