@@ -141,7 +141,7 @@ main {
     }
     #request {
         display: grid;
-        grid-template-columns: repeat(3, 25%);
+        grid-template-columns: repeat(3, 15rem);
         grid-template-rows: repeat(3, fit-content(15rem));
         grid-gap: 0.5rem;
         margin-top: 1rem;

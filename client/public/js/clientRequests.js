@@ -1,8 +1,60 @@
 const baseUrl = 'https://maintenance-software.herokuapp.com/api/v1';
 const token = `${localStorage.token}`;
 const createRequestForm = document.querySelector('#output');
-const postRequest = document.querySelector('#body');
+const userRequest = document.querySelector('#body');
 
+
+/*
+* Adds an eventListener with a callback to GET all requests for a logged in user
+*/
+const getRequest = () => {
+  fetch(`${baseUrl}/users/requests`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-type': 'application/json',
+      'x-access-token': token,
+    },
+  }).then(res => res.json())
+    .then((data) => {
+      if (data.success === true) {
+        if (sessionStorage.getItem('requests') === null || sessionStorage.getItem('requests') !== data) {
+          const requests = [];
+          requests.push(data);
+          sessionStorage.setItem('requests', JSON.stringify(requests));
+        } else {
+          const requests = JSON.parse(sessionStorage.getItem('requests'));
+          requests.push(data);
+          sessionStorage.setItem('requests', JSON.stringify(requests));
+        }
+
+        const userData = JSON.parse(sessionStorage.getItem('requests'));
+        const myRequest = document.querySelector('#request');
+
+        myRequest.innerHTML = '';
+        for (let n = 0; n <= Object.keys(userData[0]).length - 3; n += 1) {
+          const title = `${userData[0][n].title}`;
+          const department = `${userData[0][n].department}`;
+          const details = `${userData[0][n].details}`;
+          myRequest.innerHTML += `<section class="request wallpaper">
+        <a href="#">
+          <h1 class="request-title">${title}</h1>
+          <small class="sub-title">${department}</small>
+          <button type="submit" class="unresolved">UNRESOLVED</button>
+          <button type="submit" class="edit">EDIT</button>
+          <button type="submit" class="delete">DELETE</button>
+          <h2 class="sub-title">Details</h2>
+          <p class="page-info">${details}</p>
+        </a>
+      </section>`;
+        }
+      }
+    }).catch((error) => {
+      document.querySelector('#error')
+        .innerHTML = `<h2>server error<h2/>
+        <h3>${error}<h3/>`;
+    });
+};
 
 /*
 * Adds an eventListener with a callback to POST user request inputs
@@ -27,15 +79,15 @@ if (createRequestForm) {
     }).then(res => res.json())
       .then((data) => {
         if (data.success === true) {
-          if (localStorage.getItem('requests') === null) {
-            const requests = [];
-            requests.push(data);
-            localStorage.setItem('requests', JSON.stringify(requests));
-          } else {
-            const requests = JSON.parse(localStorage.getItem('requests'));
-            requests.push(data);
-            localStorage.setItem('requests', JSON.stringify(requests));
-          }
+          // if (localStorage.getItem('requests') === null) {
+          //   const requests = [];
+          //   requests.push(data);
+          //   localStorage.setItem('requests', JSON.stringify(requests));
+          // } else {
+          //   const requests = JSON.parse(localStorage.getItem('requests'));
+          //   requests.push(data);
+          //   localStorage.setItem('requests', JSON.stringify(requests));
+          // }
           document.querySelector('#output')
             .innerHTML = `<h2>${data.message}<h2/>
             `;
@@ -59,32 +111,7 @@ if (createRequestForm) {
 }
 
 
-const showRequest = () => {
-  const data = JSON.parse(localStorage.getItem('requests'));
-
-  const myRequest = document.querySelector('#request');
-
-  myRequest.innerHTML = '';
-  for (let i = 0; i < data.length; i += 1) {
-    const title = `${data[i].title}`;
-    const department = `${data[i].department}`;
-    const details = `${data[i].details}`;
-
-    myRequest.innerHTML += `<section class="request wallpaper">
-    <a href="#">
-      <h1 class="request-title">${title}</h1>
-      <small class="sub-title">${department}</small>
-      <button type="submit" class="unresolved">UNRESOLVED</button>
-      <button type="submit" class="edit">EDIT</button>
-      <button type="submit" class="delete">DELETE</button>
-      <h2 class="sub-title">Details</h2>
-      <p class="page-info">${details}</p>
-    </a>
-  </section>`;
-  }
-};
-
-if (postRequest) {
-  postRequest.addEventListener('load', showRequest());
+if (userRequest) {
+  userRequest.addEventListener('load', getRequest());
 }
 
