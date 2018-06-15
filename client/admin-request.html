@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="./public/css/request.css">
 </head>
 
-<body>
+<body id="body">
   <div class="backdrop"></div>
   <div class="background-image"></div>
   <header class="main-header">
@@ -28,10 +28,10 @@
     <nav class="main-nav">
       <ul class="main-nav__items">
         <li class="main-nav__item">
-          <a href="admin-page.html">Home</a>
+          <a href="admin-dashboard.html">Home</a>
         </li>
         <li class="main-nav__item">
-          <a href="admin-page.html">Logout</a>
+          <a href="index.html">Logout</a>
         </li>
         <li class="main-nav__item">
           <a href="create-request.html">Services</a>
@@ -46,10 +46,10 @@
   <nav class="mobile-nav">
     <ul class="mobile-nav__items">
       <li class="mobile-nav__item">
-        <a href="admin-page.html">Home</a>
+        <a href="admin-dashboard.html">Home</a>
       </li>
       <li class="mobile-nav__item">
-        <a href="admin-page.html">Logout</a>
+        <a href="index.html">Logout</a>
       </li>
       <li class="mobile-nav__item">
         <a href="create-request.html">Services</a>
@@ -70,7 +70,8 @@
         <option>By Name</option>
       </select>
     </section>
-    <section class="request wallpaper">
+    <div id="request"></div>
+    <!-- <section class="request wallpaper">
       <a href="#">
         <h1 class="request-title">David</h1>
         <button type="submit" class="resolved">RESOLVED</button>
@@ -104,7 +105,7 @@
         <p class="page-info">is a fullstack javascript web application that provides users with the ability to reachout to the operations or repairs
           department regarding repair or maintenance requests and monitor the status of their request.</p>
       </a>
-    </section>
+    </section> -->
   </main>
   <footer class="main-footer">
     <nav>
@@ -119,6 +120,7 @@
     </nav>
   </footer>
   <script src="./public/js/main.js"></script>
+  <script src="./public/js/adminClient.js"></script>
 </body>
 
 </html>
