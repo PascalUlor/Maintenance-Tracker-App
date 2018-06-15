@@ -14,12 +14,27 @@ const authLogin = () => {
     headers: {
       Accept: 'application/json, text/plain, */*',
       'Content-type': 'application/json',
-      Authorization: localStorage.token,
+      'x-access-token': localStorage.token,
     },
   }).then(res => res.json()).then((data) => {
     if (data.success === false) window.location.replace('user-page.html');
-    if (data.success === true) window.location.replace('admin-page.html');
-  }).catch(error => error.message);
+    if (data.success === true) {
+      if (sessionStorage.getItem('requests') === null || sessionStorage.getItem('requests') !== data) {
+        const requests = [];
+        requests.push(data);
+        sessionStorage.setItem('requests', JSON.stringify(requests));
+      } else {
+        const requests = JSON.parse(sessionStorage.getItem('requests'));
+        requests.push(data);
+        sessionStorage.setItem('requests', JSON.stringify(requests));
+      }
+      window.location.replace('admin-dashboard.html');
+    }
+  }).catch((error) => {
+    document.querySelector('#error')
+      .innerHTML = `<h2>server error<h2/>
+        <h3>${error}<h3/>`;
+  });
 };
 
 /**
@@ -63,7 +78,7 @@ if (signupForm) {
             .innerHTML = output;
         }
       }).catch((error) => {
-        document.querySelector('#output')
+        document.querySelector('#error')
           .innerHTML = `<h2>server error<h2/>
           <h3>${error}<h3/>`;
       });
@@ -103,7 +118,11 @@ if (loginForm) {
             .innerHTML = `<h2>${data.errors.form}<h2/>
           <h3>Please check your login details<h3/>`;
         }
-      }).catch(error => error.message);
+      }).catch((error) => {
+        document.querySelector('#error')
+          .innerHTML = `<h2>server error<h2/>
+            <h3>${error}<h3/>`;
+      });
   });
 }
 
