@@ -36,11 +36,12 @@ const getRequest = () => {
           const title = `${userData[0][n].title}`;
           const department = `${userData[0][n].department}`;
           const details = `${userData[0][n].details}`;
+          const status = `${userData[0][n].status}`;
           myRequest.innerHTML += `<section class="request wallpaper">
         <a href="#">
-          <h1 class="request-title">${title}</h1>
+          <div class="tag"><h1 class="request-title">${title}</h1>
+          <h2 class="badge">${status}</h2></div>
           <small class="sub-title">${department}</small>
-          <button type="submit" class="unresolved">UNRESOLVED</button>
           <button type="submit" class="edit">EDIT</button>
           <button type="submit" class="delete">DELETE</button>
           <h2 class="sub-title">Details</h2>

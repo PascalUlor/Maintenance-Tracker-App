@@ -14,11 +14,11 @@ const getAllRequest = () => {
     const details = `${userData[0][n].details}`;
     myRequest.innerHTML += `<section class="request wallpaper">
         <a href="#">
-          <h1 class="request-title">${title}</h1>
+          <h1 class="admin-request-title">${title}</h1>
           <small class="sub-title">${department}</small>
-          <button type="submit" class="unresolved">UNRESOLVED</button>
-          <button type="submit" class="edit">EDIT</button>
-          <button type="submit" class="delete">DELETE</button>
+          <button type="submit" class="resolved">RESOLVED</button>
+          <button type="submit" class="approved">Approved</button>
+          <button type="submit" class="disapproved">Disapproved</button>
           <h2 class="sub-title">Details</h2>
           <p class="page-info">${details}</p>
         </a>

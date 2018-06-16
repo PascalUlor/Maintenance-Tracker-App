@@ -113,6 +113,10 @@ main {
     color: #979797;
 }
 
+.request-title{
+    display: inline;
+}
+
 .page-info {
     padding: 1rem;
     border: 1px solid #0e4f1f;
@@ -121,6 +125,18 @@ main {
     background: #FFFFFF;
     font-family: 'Philosopher', sans-serif;
     font-weight: bold;
+}
+.badge {
+    color: #000000;
+    background: #FFFFFF;
+    border: 1.5px solid #000000;
+    display: inline;
+    margin-left: 4rem;
+    font-size: 0.5rem;
+    padding: 0.3rem;
+}
+.tag {
+    margin-bottom: 1rem;
 }
 
 .clearfix {
@@ -154,6 +170,10 @@ main {
         border: 4px solid #0e4f1f;
         padding: 1rem;
     }
+
+    .request-title{
+        display: inline;
+    }
     .request a {
         text-decoration: none;
         color: inherit;
@@ -168,6 +188,18 @@ main {
     main {
         margin: 3rem auto;
         max-width: 1500px;
+    }
+    .badge {
+        color: #000000;
+        background: #FFFFFF;
+        border: 1.5px solid #000000;
+        display: inline;
+        margin-left: 4rem;
+        font-size: 0.5rem;
+        padding: 0.3rem;
+    }
+    .tag {
+        margin-bottom: 1rem;
     }
 }
 
