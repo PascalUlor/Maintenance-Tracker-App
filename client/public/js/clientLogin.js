@@ -126,3 +126,10 @@ if (loginForm) {
   });
 }
 
+/**
+ * Assigns an event-listener to signupForm if it exists in the window
+ *
+ * @param {object} e - The event parameter
+ */
+
+
