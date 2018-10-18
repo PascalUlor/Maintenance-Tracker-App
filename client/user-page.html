@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link rel="stylesheet" href="./public/css/main.css">
   <link rel="stylesheet" href="./public/css/request.css">
+  <link rel="stylesheet" href="./public/css/modal.css">
+  <link rel="stylesheet" href="./public/css/form.css">
 </head>
 
 <body id="body">
@@ -61,17 +63,73 @@
   </nav>
   <main class="sitewrap">
     <h1 class="request-list">MY REQUEST LIST</h1>
-    <section class="search"  id="error">
-        <div class="search-bar">
-            <input type="text" placeholder="Search..">
+    <!--Modal Div-->
+    <div id="page_modal">
+      <div class="backdrop"></div>
+
+      <div class="modal">
+        <!-- <h1 class="form-title" id="error">Edit Request</h1>
+          <form action="create-request.html" method="POST" class="input-form" id="output"
+          onsubmit="setTimeout(function(){window.location.reload();},3000)">
+            <label for="title">Title</label>
+            <input type="text" class="name modalTitle" id="title">
+            <label for="department">Department</label>
+            <input type="text" class="sub-title modalDepartment" id="department">
+            <label for="details">Details</label>
+            <input type="textarea" class="page-info modalDetails" id="details">
+            <button type="submit" class="button">
+                Submit
+            </button>
+          </form> -->
+        <h1 class="modal__title">Do you want to continue?</h1>
+        <div>
+          <div class="currentRequest">
+              <p class="modalId" id="modalId">we</p>
+              <br>
+              <div>
+                <h1 class="name modalTitle">we</h1>
+                <br>
+                <!-- <h2 class="badge modalStatus">status</h2> -->
+              </div>
+              <br/>
+              <small class="sub-title modalDepartment" id="department${n}">department</small>
+              <h2 class="description">Description</h2>
+              <p class="page-info modalDetails" id="details${n}">details</p>
           </div>
+          
+          <div class="editText">
+            <form action="" method="POST" id="output" onsubmit="setTimeout(function(){window.location.reload();},3000)">
+              <label for="title">Title</label>
+              <input type="text" id="title">
+              <label for="department">Department</label>
+              <input type="text" id="department">
+              <label for="details">Details</label>
+              <input type="textarea" class="inputText" id="details">
+
+              <!-- <input type="text" class="inputText"> -->
+              <button href="#" class="submit_button" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="modal__actions">
+          <a href="#" class="modal__action action">Edit</a>
+          <button class="modal__action modal__action--negative" type="button">Exit</button>
+        </div>
+      </div>
+
+    </div>
+    <!--Modal End-->
+    <section class="search" id="error">
+      <div class="search-bar">
+        <input type="text" placeholder="Search..">
+      </div>
       <select class="drop-down">
         <option>By Date</option>
         <option>By Name</option>
       </select>
     </section>
     <div id="request">
-        <!-- <section class="request wallpaper">
+      <!-- <section class="request wallpaper">
             <a href="#">
               <div class="tag"><h1 class="request-title">David</h1>
               <h2 class="badge">PENDING</h2></div>
@@ -118,7 +176,7 @@
   <script src="./public/js/main.js"></script>
   <script src="./public/js/clientRequests.js"></script>
   <script>
-  
+
   </script>
 </body>
 

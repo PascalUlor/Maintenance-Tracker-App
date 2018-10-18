@@ -38,14 +38,14 @@ const getRequest = () => {
           const details = `${userData[0][n].details}`;
           const status = `${userData[0][n].status}`;
           myRequest.innerHTML += `<section class="request wallpaper">
-        <a href="#">
-          <div class="tag"><h1 class="request-title">${title}</h1>
-          <h2 class="badge">${status}</h2></div>
-          <small class="sub-title">${department}</small>
+        <a href="#" class="edit">
+          <div class="tag modalTitle" id="title${n}"><h1 class="request-title">${title}</h1>
+          <h2 class="badge modalStatus" id="status${n}">${status}</h2></div>
+          <small class="sub-title modalDepartment" id="department${n}">${department}</small>
           <button type="submit" class="edit">EDIT</button>
           <button type="submit" class="delete">DELETE</button>
           <h2 class="sub-title">Details</h2>
-          <p class="page-info">${details}</p>
+          <p class="page-info modalDetails" id="details${n}">${details}</p>
         </a>
       </section>`;
         }
@@ -116,3 +116,45 @@ if (userRequest) {
   userRequest.addEventListener('load', getRequest());
 }
 
+/**
+ * Update and edit user request
+ * @param {object} edit event
+ */
+
+const updateRequest = (e) => {
+  e.preventDefault();
+  const title = document.querySelector('#title').value;
+  const department = document.querySelector('#department').value;
+  const details = document.querySelector('#details').value;
+
+  fetch(`${baseUrl}/users/requests/${requestId}`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-type': 'application/json',
+      'x-access-token': token,
+    },
+    body: JSON.stringify({ title, department, details }),
+  }).then(res => res.json())
+    .then((data) => {
+      if (data.success === true) {
+        document.querySelector('#output')
+          .innerHTML = `<h2>${data.message}<h2/>
+          `;
+        setTimeout(() => {
+          window.location.replace('user-page.html');
+        }, 5000);
+      } else {
+        let output = '<h3>Error<h3/>';
+        Object.keys(data).forEach((key) => {
+          output += `<p>${data[key]}<p/>`;
+        });
+        document.querySelector('#request')
+          .innerHTML = output;
+      }
+    }).catch((error) => {
+      document.querySelector('#error')
+        .innerHTML = `<h2>server error<h2/>
+        <h3>${error}<h3/>`;
+    });
+};
